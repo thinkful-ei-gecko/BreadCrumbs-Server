@@ -7,10 +7,10 @@
   "author" TEXT DEFAULT NULL,
   "title" TEXT DEFAULT NULL,
   "description" TEXT DEFAULT NULL,
-  "sourceName" TEXT DEFAULT NULL, 
-  "url" VARCHAR(2048) DEFAULT NULL,
-  "urlToImage" TEXT DEFAULT NULL,
-  "publishAt" TIMESTAMP DEFAULT now() NOT NULL,
+  "source_name" TEXT DEFAULT NULL, 
+  "url" TEXT DEFAULT NULL,
+  "url_to_image" TEXT DEFAULT NULL,
+  "publish_at" TIMESTAMP DEFAULT now() NOT NULL,
   "content" TEXT NOT NULL
 );
 
@@ -20,4 +20,4 @@
   
   ALTER TABLE "comment"
     ADD COLUMN "article_id" INTEGER REFERENCES "article"(id)
-    ON DELETE CASCADE NOT NULL;
+    ON DELETE CASCADE;

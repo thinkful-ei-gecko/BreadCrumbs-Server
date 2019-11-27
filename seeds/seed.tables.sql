@@ -38,7 +38,7 @@ VALUES
   1,
   45,
   23,
-  'ChloeBryan',
+  'Chloe Bryan',
   'The cats can have little a salami meme is the best kind of meme',
   'Cats can, famously, have little a salami. But can cats really have little a salami? The meme is the best kind of meme: a single sentence applied to every possible post like a gorgeous, nonsensical chorus.',
   'Mashable',

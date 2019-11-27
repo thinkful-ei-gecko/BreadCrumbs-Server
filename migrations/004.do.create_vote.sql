@@ -1,10 +1,8 @@
-  CREATE TABLE "vote" (
+  CREATE TABLE "article_vote" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER REFERENCES "user"(id)
     ON DELETE CASCADE NOT NULL,
   "article_id" INTEGER REFERENCES "article"(id)
     ON DELETE CASCADE NOT NULL,
-  "comment_id" INTEGER REFERENCES "comment"(id)
-    ON DELETE CASCADE NOT NULL,
-  "voteType" TEXT DEFAULT NULL
+  "vote_type" TEXT DEFAULT NULL
 );
