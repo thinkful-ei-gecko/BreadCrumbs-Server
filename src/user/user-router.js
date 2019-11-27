@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const UserService = require('./user-service')
+const { requireAuth } = require("../middleware/jwt-auth");
+
 
 const userRouter = express.Router()
 const jsonBodyParser = express.json()
@@ -42,8 +44,6 @@ userRouter
         newUser
       )
 
-
-
       res
         .status(201)
         .location(path.posix.join(req.originalUrl, `/${user.id}`))
@@ -52,5 +52,16 @@ userRouter
       next(error)
     }
   })
+
+  .put(requireAuth, (req, res) => {
+    const sub = req.user.username;
+    const payload = {
+      user_id: req.user.id,
+      name: req.user.name
+    };
+    res.send({
+      authToken: AuthService.createJwt(sub, payload)
+    });
+  });
 
 module.exports = userRouter
