@@ -27,7 +27,8 @@ articleRouter
   .route('/')
   .get((req, res, next) => {
     const db = req.app.get('db')
-    ArticleService.getAllArticles(db)
+    const id = req.user.id
+    ArticleService.getUserArticles(db, id)
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
       .catch(next)
   })

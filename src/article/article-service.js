@@ -1,9 +1,10 @@
 const ArticleService = {
 
-    getAllArticles(db) {
+    getUserArticles(db, user_id) {
       return db
+        .from('article')
         .select('*')
-        .from('article');
+        .where('article.user_id', user_id);
     },
     getArticleById(db, id) {
       return db
