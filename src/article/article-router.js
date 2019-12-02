@@ -73,6 +73,7 @@ articleRouter
   });
 
   articleRouter
+    .use(requireAuth)
     .route('/:articleId')
     .all((req, res, next) => {
       const db = req.app.get('db')
