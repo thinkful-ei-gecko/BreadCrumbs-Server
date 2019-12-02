@@ -1,5 +1,10 @@
 const ArticleService = {
 
+    getAllDbArticles(db) {
+      return db
+        .select('*')
+        .from('article');
+    },
     getUserArticles(db, user_id) {
       return db
         .from('article')

@@ -23,6 +23,15 @@ const serializeArticle = article => ({
 });
 
 articleRouter
+  .route('/popular')
+  .get((req, res, next) => {
+    const db = req.app.get('db')
+    ArticleService.getAllDbArticles(db)
+      .then(articles => res.status(200).json(articles.map(serializeArticle)))
+      .catch(next)
+  })
+
+articleRouter
   .use(requireAuth)
   .route('/')
   .get((req, res, next) => {
