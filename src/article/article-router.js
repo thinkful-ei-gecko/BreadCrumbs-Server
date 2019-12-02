@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const xss = require('xss');
 const ArticleService = require('./article-service');
 const { requireAuth } = require("../middleware/jwt-auth");
@@ -30,6 +31,75 @@ articleRouter
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
       .catch(next)
   })
+  .post(jsonParser, (req, res, next) => {
+    const {
+      user_id,
+      upvote_count,
+      downvote_count,
+      author,
+      title,
+      description,
+      source_name,
+      url,
+      url_to_image,
+      publish_at,
+      content
+    } = req.body
+
+    const savedArticle = {
+      user_id,
+      upvote_count,
+      downvote_count,
+      author,
+      title,
+      description,
+      source_name,
+      url,
+      url_to_image,
+      publish_at,
+      content
+    }
+
+    const db = req.app.get('db')
+
+    ArticleService.insertArticle(db, savedArticle)
+      .then(article => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${article.id}`))
+          .json(serializeArticle(article))
+      })
+      .catch(next)
+  });
+
+  articleRouter
+    .route('/:articleId')
+    .all((req, res, next) => {
+      const db = req.app.get('db')
+      const id = req.params.articleId
+      ArticleService.getArticleById(db, id)
+        .then(article => {
+          if(!article) {
+            return res.status(404).json({error: {message: 'Article does not exist'}})
+          }
+          res.article = article
+          next()
+        })
+        .catch(next)
+    })
+    .get((req, res, next) => {
+      res.status(200).json(res.article)
+    })
+    .delete((req, res, next) => {
+      const db = req.app.get('db')
+      const id = req.params.articleId
+
+      ArticleService.deleteArticle(db, id)
+        .then(() => {
+          res.status(204).end()
+        })
+        .catch(next)
+    });
 
 
   module.exports = articleRouter;
