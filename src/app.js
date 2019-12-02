@@ -28,7 +28,7 @@ app.use(cors());
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
-// app.use("/api/article", articleRouter);
+app.use("/api/article", articleRouter);
 // app.use("/api/comment", commentRouter);
 
 
