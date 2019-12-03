@@ -31,13 +31,12 @@ VALUES
 );
 
 
-INSERT INTO "article" (id, user_id, upvote_count, downvote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
+INSERT INTO "article" (id, user_id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
 VALUES
 (
   1,
   1,
   45,
-  23,
   'Chloe Bryan',
   'The cats can have little a salami meme is the best kind of meme',
   'Cats can, famously, have little a salami. But can cats really have little a salami? The meme is the best kind of meme: a single sentence applied to every possible post like a gorgeous, nonsensical chorus.',
@@ -51,7 +50,6 @@ VALUES
   2,
   2,
   563,
-  12,
   'Donald Trump',
   'The cats can have little a salami meme is the best kind of meme',
   'Cats can, famously, have little a salami. But can cats really have little a salami? The meme is the best kind of meme: a single sentence applied to every possible post like a gorgeous, nonsensical chorus.',
@@ -65,7 +63,6 @@ VALUES
   3,
   2,
   45,
-  523,
   'Ashley Hansen',
   'The cats can have little a salami meme is the best kind of meme',
   'Cats can, famously, have little a salami. But can cats really have little a salami? The meme is the best kind of meme: a single sentence applied to every possible post like a gorgeous, nonsensical chorus.',
@@ -78,7 +75,6 @@ VALUES
 (
   4,
   3,
-  145,
   145,
   'Shawn Collette',
   'The cats can have little a salami meme is the best kind of meme',

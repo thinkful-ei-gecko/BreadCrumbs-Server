@@ -2,8 +2,9 @@
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER REFERENCES "user"(id)
     ON DELETE CASCADE NOT NULL,
-  "upvote_count" INTEGER DEFAULT NULL, 
-  "downvote_count" INTEGER DEFAULT NULL,
+  "vote_count" INTEGER DEFAULT NULL, 
+  -- "upvote_count" INTEGER DEFAULT NULL, 
+  -- "downvote_count" INTEGER DEFAULT NULL,
   "author" TEXT DEFAULT NULL,
   "title" TEXT DEFAULT NULL,
   "description" TEXT DEFAULT NULL,

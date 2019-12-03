@@ -10,8 +10,9 @@ const jsonParser = express.json();
 const serializeArticle = article => ({
   id: article.id,
   user_id: article.user_id,
-  upvote_count: xss(article.upvote_count),
-  downvote_count: xss(article.downvote_count),
+  vote_count: xss(article.vote_count),
+  // upvote_count: xss(article.upvote_count),
+  // downvote_count: xss(article.downvote_count),
   author: xss(article.author),
   title: xss(article.title),
   description: xss(article.description),
@@ -44,8 +45,9 @@ articleRouter
   .post(jsonParser, (req, res, next) => {
     const {
       user_id,
-      upvote_count,
-      downvote_count,
+      vote_count,
+      // upvote_count,
+      // downvote_count,
       author,
       title,
       description,
@@ -58,8 +60,9 @@ articleRouter
 
     const savedArticle = {
       user_id,
-      upvote_count,
-      downvote_count,
+      vote_count,
+      // upvote_count,
+      // downvote_count,
       author,
       title,
       description,

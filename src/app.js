@@ -9,6 +9,7 @@ const errorHandler = require('./middleware/error-handler');
 const authRouter = require("./auth/auth-router");
 const userRouter = require("./user/user-router");
 const articleRouter = require("./article/article-router");
+const voteRouter = require("./vote/vote-router");
 const commentRouter = require("./comment/comment-router");
 
 
@@ -29,6 +30,7 @@ app.use(cors());
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/article", articleRouter);
+app.use("/api/vote", voteRouter);
 // app.use("/api/comment", commentRouter);
 
 
