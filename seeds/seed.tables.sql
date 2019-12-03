@@ -118,30 +118,26 @@ VALUES
     3
 );
 
-INSERT INTO "article_vote" (id, vote_type, user_id, article_id)
+INSERT INTO "article_vote" (id, vote_type, article_id)
 VALUES 
 (
   1,
-  'up',
-  1,
+  'null',
   3
 ),
 (
   2,
-  'down',
-  2,
+  'null',
   2
 ),
 (
   3,
-  'up',
-  1,
+  'null',
   3
 ),
 (
   4,
-  'down',
-  3,
+  'null',
   1
 );
 
