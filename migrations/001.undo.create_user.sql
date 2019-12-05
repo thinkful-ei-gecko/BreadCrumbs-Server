@@ -1,1 +1,3 @@
 DROP TABLE IF EXISTS "user";
+DROP EXTENSION "uuid-ossp";
+DROP EXTENSION "pgcrypto";

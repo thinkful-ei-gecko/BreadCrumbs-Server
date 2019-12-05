@@ -36,6 +36,74 @@ VALUES
 );
 
 
+
+INSERT INTO "comment" (id, user_id, comment, date_commented, article_id)
+VALUES
+  (
+    '3a8aee05-1787-4759-8afc-a3265cdc0c03',
+    'a2424f48-132a-435c-8488-d1fc00d7afef',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-03 22:59:37',
+    'e6cdd77b-dc7d-4450-9661-e6b7787fb325'
+),
+  (
+    '5aab087f-1804-4e66-9dcf-3167920b4029',
+    'a2424f48-132a-435c-8488-d1fc00d7afef',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-03 22:59:37',
+    '410d5894-4946-4c1a-abad-552642dc55fc'
+),
+  (
+    '720d9619-ec84-464a-9415-9fbbc3282bc9',
+    'a2424f48-132a-435c-8488-d1fc00d7afef',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-02 22:59:37',
+    'a1385155-5a02-4f8a-bfdc-e3a5379dbea0'
+),
+  (
+    '772170f1-1f21-43a0-b922-d035834ce19f',
+    '0cc08532-b8d8-434f-84be-91993b6a5488',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-031 22:59:37',
+    '9a944db6-94f1-42e2-abaf-94c0cc09faa8'
+),
+  (
+    '6dab56ce-e745-45d5-85b7-952eca959498',
+    '0cc08532-b8d8-434f-84be-91993b6a5488',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-03 22:59:37',
+    'e9baa01d-95c8-46ac-a6bd-e2f9f4258f3a'
+),
+  (
+    '345219c5-f988-4442-913f-ac8f5add7135',
+    '10cc08532-b8d8-434f-84be-91993b6a5488',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-03 22:59:37',
+    'aaa444de-c6f6-4ff8-ae24-a2c2d4cec5f0'
+),
+  (
+    '2e1d81c9-d6f8-4642-b1c0-b32ff9a2fac7',
+    'c5885553-dcae-4b77-a28a-5335fa15ef0c',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-02 22:59:37',
+    '08723f6f-f683-46ed-86e7-48d016b41d09'
+),
+  (
+    '489faace-5959-4b5c-afe5-7b17d0f97087',
+    'c5885553-dcae-4b77-a28a-5335fa15ef0c',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-031 22:59:37',
+    '5054c37f-5273-428a-ad8e-5c29be9a40d4'
+),
+(
+    '4b710a05-734b-4a04-8aef-357fe005bf50',
+    '3c5885553-dcae-4b77-a28a-5335fa15ef0c',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    '2019-12-031 22:59:37',
+    '0c40008d-f50d-4275-bcb9-6562d8d326d5'
+  );
+
+
 -- INSERT INTO "article" (id, user_id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
 INSERT INTO "article" (id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
 VALUES
@@ -150,73 +218,6 @@ VALUES
 
 
 
-INSERT INTO "comment" (id, user_id, comment, date_commented, article_id)
-VALUES
-  (
-    '3a8aee05-1787-4759-8afc-a3265cdc0c03',
-    'a2424f48-132a-435c-8488-d1fc00d7afef',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-03 22:59:37',
-    'e6cdd77b-dc7d-4450-9661-e6b7787fb325'
-),
-  (
-    '5aab087f-1804-4e66-9dcf-3167920b4029',
-    'a2424f48-132a-435c-8488-d1fc00d7afef',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-03 22:59:37',
-    '410d5894-4946-4c1a-abad-552642dc55fc'
-),
-  (
-    '720d9619-ec84-464a-9415-9fbbc3282bc9',
-    'a2424f48-132a-435c-8488-d1fc00d7afef',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-02 22:59:37',
-    'a1385155-5a02-4f8a-bfdc-e3a5379dbea0'
-),
-  (
-    '772170f1-1f21-43a0-b922-d035834ce19f',
-    '0cc08532-b8d8-434f-84be-91993b6a5488',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-031 22:59:37',
-    '9a944db6-94f1-42e2-abaf-94c0cc09faa8'
-),
-  (
-    '6dab56ce-e745-45d5-85b7-952eca959498',
-    '0cc08532-b8d8-434f-84be-91993b6a5488',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-03 22:59:37',
-    'e9baa01d-95c8-46ac-a6bd-e2f9f4258f3a'
-),
-  (
-    '345219c5-f988-4442-913f-ac8f5add7135',
-    '0cc08532-b8d8-434f-84be-91993b6a5488',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-03 22:59:37',
-    'aaa444de-c6f6-4ff8-ae24-a2c2d4cec5f0'
-),
-  (
-    '2e1d81c9-d6f8-4642-b1c0-b32ff9a2fac7',
-    'c5885553-dcae-4b77-a28a-5335fa15ef0c',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-02 22:59:37',
-    '08723f6f-f683-46ed-86e7-48d016b41d09'
-),
-  (
-    '489faace-5959-4b5c-afe5-7b17d0f97087',
-    'c5885553-dcae-4b77-a28a-5335fa15ef0c',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-031 22:59:37',
-    '5054c37f-5273-428a-ad8e-5c29be9a40d4'
-),
-(
-    '4b710a05-734b-4a04-8aef-357fe005bf50',
-    'c5885553-dcae-4b77-a28a-5335fa15ef0c',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    '2019-12-031 22:59:37',
-    '0c40008d-f50d-4275-bcb9-6562d8d326d5'
-  );
-
-
 
 INSERT INTO "article_vote" (id, vote_type, user_id, article_id)
 -- INSERT INTO "article_vote" (id, vote_type, article_id)
@@ -320,7 +321,7 @@ VALUES
   '7ada4a73-20d0-400d-b33f-312c52f83b1b',
   'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
-  '2e1d81c9-d6f8-4642-b1c0-b32ff9a2fac7'
+  '02e1d81c9-d6f8-4642-b1c0-b32ff9a2fac7'
 ),
 (
   'f45b1cf3-a670-4571-8bf5-0bf7465a8e92',
@@ -376,7 +377,7 @@ VALUES
 (
   '9567f69f-a0bd-4342-b0dc-a06f3599169c',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
-  '08723f6f-f683-46ed-86e7-48d016b41d09',
+  '008723f6f-f683-46ed-86e7-48d016b41d09',
   '2019-12-03T23:12:57Z'
 ),
 (
@@ -433,7 +434,7 @@ VALUES
 (
   '9567f69f-a0bd-4342-b0dc-a06f3599169c',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
-  '08723f6f-f683-46ed-86e7-48d016b41d09',
+  '008723f6f-f683-46ed-86e7-48d016b41d09',
   '2019-12-03T23:12:57Z'
 ),
 (
