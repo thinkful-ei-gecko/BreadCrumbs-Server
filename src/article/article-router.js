@@ -74,8 +74,6 @@ articleRouter
     const savedArticle = {
       user_id,
       vote_count,
-      // upvote_count,
-      // downvote_count,
       author,
       title,
       description,
