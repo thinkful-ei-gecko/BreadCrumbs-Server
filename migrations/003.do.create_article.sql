@@ -2,7 +2,7 @@
   "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
   -- "user_id" UUID REFERENCES "user"(id)
   --   ON DELETE CASCADE NOT NULL,
-  "vote_count" INTEGER DEFAULT NULL, 
+  "vote_count" INTEGER DEFAULT 0, 
   -- "upvote_count" INTEGER DEFAULT NULL, 
   -- "downvote_count" INTEGER DEFAULT NULL,
   "author" TEXT DEFAULT NULL,
@@ -15,12 +15,8 @@
   "content" TEXT NOT NULL,
   "posted_at" TIMESTAMP DEFAULT now() NOT NULL,
   PRIMARY KEY(id)
-
 );
 
-  
-  
-  
   
   ALTER TABLE "comment"
     ADD COLUMN "article_id" UUID REFERENCES "article"(id)

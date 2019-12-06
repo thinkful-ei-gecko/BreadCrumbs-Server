@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const xss = require('xss');
 const ArticleService = require('./article-service');
-const { requireAuth } = require("../middleware/jwt-auth");
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const articleRouter = express.Router();
 const jsonParser = express.json();
@@ -10,9 +10,8 @@ const jsonParser = express.json();
 const serializeArticle = article => ({
   id: article.id,
   user_id: article.user_id,
+  date_baked: xss(article.date_baked),
   vote_count: xss(article.vote_count),
-  // upvote_count: xss(article.upvote_count),
-  // downvote_count: xss(article.downvote_count),
   author: xss(article.author),
   title: xss(article.title),
   description: xss(article.description),
@@ -20,14 +19,30 @@ const serializeArticle = article => ({
   url: xss(article.url),
   url_to_image: xss(article.url_to_image),
   publish_at: xss(article.publish_at),
-  content: xss(article.content)
+  content: xss(article.content),
 });
 
+// const serializeArticle = article => ({
+//   id: article.id,
+//   user_id: article.user_id,
+//   date_baked: xss(article.date_baked),
+//   date_saved:xss(article.date_baked),
+//   vote_count: xss(article.vote_count),
+//   author: xss(article.author),
+//   title: xss(article.title),
+//   description: xss(article.description),
+//   source_name: xss(article.source_name),
+//   url: xss(article.url),
+//   url_to_image: xss(article.url_to_image),
+//   publish_at: xss(article.publish_at),
+//   content: xss(article.content),
+// });
+
 articleRouter
-  .route('/popular')
+  .route('/oven')
   .get((req, res, next) => {
     const db = req.app.get('db')
-    ArticleService.getAllDbArticles(db)
+    ArticleService.getOvenArticles(db)
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
       .catch(next)
   })
@@ -46,8 +61,6 @@ articleRouter
     const {
       user_id,
       vote_count,
-      // upvote_count,
-      // downvote_count,
       author,
       title,
       description,
@@ -110,7 +123,7 @@ articleRouter
 
       ArticleService.deleteArticle(db, id)
         .then(() => {
-          res.status(204).end()
+          
         })
         .catch(next)
     });

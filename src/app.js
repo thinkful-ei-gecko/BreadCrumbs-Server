@@ -11,6 +11,7 @@ const userRouter = require("./user/user-router");
 const articleRouter = require("./article/article-router");
 const voteRouter = require("./vote/vote-router");
 const commentRouter = require("./comment/comment-router");
+const saveRouter = require("./save/save-router");
 
 
 
@@ -31,6 +32,7 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/article", articleRouter);
 app.use("/api/vote", voteRouter);
+app.use("/api/save", saveRouter);
 // app.use("/api/comment", commentRouter);
 
 

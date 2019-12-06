@@ -4,6 +4,6 @@
     ON DELETE CASCADE NOT NULL,
   "article_id" UUID REFERENCES "article"(id)
     ON DELETE CASCADE NOT NULL,
-  "vote_type" TEXT DEFAULT NULL,
+  "vote_type" BOOLEAN DEFAULT NULL,
   PRIMARY KEY(id)
 );

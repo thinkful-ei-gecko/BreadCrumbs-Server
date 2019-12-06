@@ -36,7 +36,6 @@ VALUES
 );
 
 
--- INSERT INTO "article" (id, user_id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
 INSERT INTO "article" (id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
 VALUES
 (
@@ -218,119 +217,100 @@ VALUES
 
 
 
-INSERT INTO "article_vote" (id, vote_type, user_id, article_id)
--- INSERT INTO "article_vote" (id, vote_type, article_id)
+INSERT INTO "article_vote" (id, user_id, article_id)
 VALUES 
 (
   '36e0dd35-825b-4a9d-96d7-1da202e1657d',
-  'null',
   'a2424f48-132a-435c-8488-d1fc00d7afef',
   'e6cdd77b-dc7d-4450-9661-e6b7787fb325'
 ),
 (
   '28d6e3e4-177b-4d26-a18b-3e234c718f16',
-  'null',
   'a2424f48-132a-435c-8488-d1fc00d7afef',
   '410d5894-4946-4c1a-abad-552642dc55fc'
 ),
 (
   '98dbba5f-bd61-44e5-81b1-4e794dbde5df',
-  'null',
   'a2424f48-132a-435c-8488-d1fc00d7afef',
   'a1385155-5a02-4f8a-bfdc-e3a5379dbea0'
 ),
 (
   '7ad77046-9c0b-4c08-bae7-eeebf438a561',
-  'null',
   '0cc08532-b8d8-434f-84be-91993b6a5488',
   '9a944db6-94f1-42e2-abaf-94c0cc09faa8'
 ),
 (
   'e3a171fd-2c93-40ea-9831-c7ca1bb1b4c3',
-  'null',
   '0cc08532-b8d8-434f-84be-91993b6a5488',
   'e9baa01d-95c8-46ac-a6bd-e2f9f4258f3a'
 ),
 (
   'c2151baf-d3ce-4585-87b2-f35b4fe3ed77',
-  'null',
   '0cc08532-b8d8-434f-84be-91993b6a5488',
   'aaa444de-c6f6-4ff8-ae24-a2c2d4cec5f0'
 ),
 (
   '7ada4a73-20d0-400d-b33f-312c52f83b1b',
-  'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
   '08723f6f-f683-46ed-86e7-48d016b41d09'
 ),
 (
   'f45b1cf3-a670-4571-8bf5-0bf7465a8e92',
-  'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
   '5054c37f-5273-428a-ad8e-5c29be9a40d4'
 ),
 (
   '865e289a-d2b0-48ab-b444-e5cdc1fc6fe8',
-  'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
   '0c40008d-f50d-4275-bcb9-6562d8d326d5'
 );
 
 
 
-INSERT INTO "comment_vote" (id, vote_type, user_id, comment_id)
+INSERT INTO "comment_vote" (id, user_id, comment_id)
 VALUES 
 (
   '36e0dd35-825b-4a9d-96d7-1da202e1657d',
-  'null',
   'a2424f48-132a-435c-8488-d1fc00d7afef',
   '3a8aee05-1787-4759-8afc-a3265cdc0c03'
 ),
 (
   '28d6e3e4-177b-4d26-a18b-3e234c718f16',
-  'null',
   'a2424f48-132a-435c-8488-d1fc00d7afef',
   '5aab087f-1804-4e66-9dcf-3167920b4029'
 ),
 (
   '98dbba5f-bd61-44e5-81b1-4e794dbde5df',
-  'null',
   'a2424f48-132a-435c-8488-d1fc00d7afef',
   '720d9619-ec84-464a-9415-9fbbc3282bc9'
 ),
 (
   '7ad77046-9c0b-4c08-bae7-eeebf438a561',
-  'null',
   '0cc08532-b8d8-434f-84be-91993b6a5488',
   '772170f1-1f21-43a0-b922-d035834ce19f'
 ),
 (
   'e3a171fd-2c93-40ea-9831-c7ca1bb1b4c3',
-  'null',
   '0cc08532-b8d8-434f-84be-91993b6a5488',
   '6dab56ce-e745-45d5-85b7-952eca959498'
 ),
 (
   'c2151baf-d3ce-4585-87b2-f35b4fe3ed77',
-  'null',
   '0cc08532-b8d8-434f-84be-91993b6a5488',
   '345219c5-f988-4442-913f-ac8f5add7135'
 ),
 (
   '7ada4a73-20d0-400d-b33f-312c52f83b1b',
-  'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
   '2e1d81c9-d6f8-4642-b1c0-b32ff9a2fac7'
 ),
 (
   'f45b1cf3-a670-4571-8bf5-0bf7465a8e92',
-  'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
   '489faace-5959-4b5c-afe5-7b17d0f97087'
 ),
 (
   '865e289a-d2b0-48ab-b444-e5cdc1fc6fe8',
-  'null',
   'c5885553-dcae-4b77-a28a-5335fa15ef0c',
   '4b710a05-734b-4a04-8aef-357fe005bf50'
 );
