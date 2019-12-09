@@ -52,7 +52,6 @@ articleRouter
   .all(requireAuth)
   .route('/')
   .get((req, res, next) => {
-    
     const db = req.app.get('db');
     const id = req.user.id;
     ArticleService.getUserArticles(db, id)
