@@ -33,7 +33,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/article", articleRouter);
 app.use("/api/vote", voteRouter);
 app.use("/api/save", saveRouter);
-app.use("/api/comments", commentRouter);
+app.use("/api/comment", commentRouter);
 
 
 app.get('/', (req, res) => {
