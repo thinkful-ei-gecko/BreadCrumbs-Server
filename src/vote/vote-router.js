@@ -29,7 +29,7 @@ voteRouter
         newVoteType = req.body.vote_type;
         vote_id = vote[0].id;
   
-        if(oldVoteType === null) {
+        if(oldVoteType === 0) {
           if(newVoteType === true) {
             newVoteCount++;
           }
