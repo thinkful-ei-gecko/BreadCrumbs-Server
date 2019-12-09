@@ -11,7 +11,7 @@ const serializeArticle = article => ({
   id: article.id,
   // user_id: article.user_id,
   // date_baked: xss(article.date_baked),
-  vote_count: xss(article.vote_count),
+  vote_count:article.vote_count,
   author: xss(article.author),
   title: xss(article.title),
   description: xss(article.description),

@@ -13,6 +13,15 @@ const CommentService = {
         return rows[0]
       })
   },
+  getCommentsForArticle(db, article_id) {
+    return db
+      .select('*')
+      .from('comment')
+      .leftJoin('user','comment.user_id', '=', 'user.id')
+      .where({
+        'comment.article_id':article_id
+      });
+  },
   getCommentById(db, id) {
     return db
       .from('comment')
@@ -29,7 +38,8 @@ const CommentService = {
     return db('comment')
       .where({ id })
       .update(updateFields)
-  }
+  },
+
 };
 
 module.exports = CommentService;
