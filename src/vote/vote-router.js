@@ -13,12 +13,12 @@ voteRouter
     const { user_id, article_id, vote_type } = req.body
     let voteValue;
     const db = req.app.get('db')
-    VoteService.getVote(db, article_id)
+    let voteStatus = VoteService.getVote(db, article_id)
       .then(res => res.json())
     ArticleService.getUserArticles(db, user_id)
       .then(articles => articles.filter(art => {
         art.id === article_id
-        if(voteStatus.vote_type === null) {
+      if(voteStatus.vote_type === null) {
           if(vote_type === 'up') {
             voteValue = art.vote_count + 1
             VoteService.updateArticleVoteCount(db, article_id, voteValue)
