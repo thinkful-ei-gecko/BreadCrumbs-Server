@@ -9,8 +9,8 @@ const jsonParser = express.json();
 
 const serializeArticle = article => ({
   id: article.id,
-  user_id: article.user_id,
-  date_baked: xss(article.date_baked),
+  // user_id: article.user_id,
+  // date_baked: xss(article.date_baked),
   vote_count: xss(article.vote_count),
   author: xss(article.author),
   title: xss(article.title),
@@ -40,91 +40,90 @@ const serializeArticle = article => ({
 
 articleRouter
   .route('/oven')
+  .all(requireAuth)
   .get((req, res, next) => {
-    const db = req.app.get('db')
-    ArticleService.getOvenArticles(db)
+    const db = req.app.get('db');
+    ArticleService.getAllDbArticles(db)
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
-      .catch(next)
+      .catch(next);
+  });
+
+articleRouter
+  .all(requireAuth)
+  .route('/')
+  .get((req, res, next) => {
+    
+    const db = req.app.get('db');
+    const id = req.user.id;
+    ArticleService.getUserArticles(db, id)
+      .then(articles => res.status(200).json(articles.map(serializeArticle)))
+      .catch(next);
   })
+  .post(requireAuth,jsonParser, (req, res, next) => {
+    console.log('####',req.user.id)
+    const {
+      author,
+      title,
+      description,
+      source_name,
+      url,
+      url_to_image,
+      publish_at,
+      content
+    } = req.body;
+    
+    const savedArticle = {
+      author,
+      title,
+      description,
+      source_name,
+      url,
+      url_to_image,
+      publish_at,
+      content
+    };
+
+    const db = req.app.get('db');
+
+    ArticleService.insertArticle(db, savedArticle,req.user.id)
+      .then(articles => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl))
+          .json(articles.map(serializeArticle));
+      })
+      .catch(next);
+  });
 
 articleRouter
   .use(requireAuth)
-  .route('/')
-  .get((req, res, next) => {
-    const db = req.app.get('db')
-    const id = req.user.id
-    ArticleService.getUserArticles(db, id)
-      .then(articles => res.status(200).json(articles.map(serializeArticle)))
-      .catch(next)
-  })
-  .post(jsonParser, (req, res, next) => {
-    const {
-      user_id,
-      vote_count,
-      author,
-      title,
-      description,
-      source_name,
-      url,
-      url_to_image,
-      publish_at,
-      content
-    } = req.body
-
-    const savedArticle = {
-      user_id,
-      vote_count,
-      author,
-      title,
-      description,
-      source_name,
-      url,
-      url_to_image,
-      publish_at,
-      content
-    }
-
-    const db = req.app.get('db')
-
-    ArticleService.insertArticle(db, savedArticle)
+  .route('/:articleId')
+  .all((req, res, next) => {
+    const db = req.app.get('db');
+    const id = req.params.articleId;
+    ArticleService.getArticleById(db, id)
       .then(article => {
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `/${article.id}`))
-          .json(serializeArticle(article))
+        if(!article) {
+          return res.status(404).json({error: {message: 'Article does not exist'}});
+        }
+        res.article = article;
+        next();
       })
-      .catch(next)
+      .catch(next);
+  })
+  .get((req, res, next) => {
+    res.status(200).json(res.article);
+  })
+  .delete((req, res, next) => {
+    const db = req.app.get('db');
+    const id = req.params.articleId;
+
+    ArticleService.deleteArticle(db, id)
+      .then(() => {
+          
+      })
+      .catch(next);
   });
 
-  articleRouter
-    .use(requireAuth)
-    .route('/:articleId')
-    .all((req, res, next) => {
-      const db = req.app.get('db')
-      const id = req.params.articleId
-      ArticleService.getArticleById(db, id)
-        .then(article => {
-          if(!article) {
-            return res.status(404).json({error: {message: 'Article does not exist'}})
-          }
-          res.article = article
-          next()
-        })
-        .catch(next)
-    })
-    .get((req, res, next) => {
-      res.status(200).json(res.article)
-    })
-    .delete((req, res, next) => {
-      const db = req.app.get('db')
-      const id = req.params.articleId
 
-      ArticleService.deleteArticle(db, id)
-        .then(() => {
-          
-        })
-        .catch(next)
-    });
-
-
-  module.exports = articleRouter;
+module.exports = articleRouter;
