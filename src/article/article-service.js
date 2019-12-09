@@ -9,7 +9,8 @@ const ArticleService = {
     return db
       .from('article')
       .select('*')
-      .where('article.user_id', user_id);
+      .where('article.user_id', user_id)
+      .orderBy('vote_count', 'desc');
   },
   getArticleById(db, id) {
     return db
