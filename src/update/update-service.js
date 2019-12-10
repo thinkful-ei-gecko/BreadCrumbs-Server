@@ -46,7 +46,7 @@ const UpdateService = {
     return db
       .from('user')
       .select('*')
-      .where('id', id)
+      .where({ 'id': id })
   },
   updateFields(db, id, updateFields) {
     return db
@@ -57,8 +57,8 @@ const UpdateService = {
   updatePassword(db, id, new_password) {
     return db
       .from('user')
-      .where({id})
-      .update({password: new_password})
+      .where({ 'id': id })
+      .update({ 'password': new_password })
   },
   deleteUser(db, id){
     return db

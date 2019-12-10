@@ -1,22 +1,40 @@
 const express = require('express')
 const path = require('path')
+const xss = require('xss');
 const UpdateService = require('./update-service')
 const { requireAuth } = require("../middleware/jwt-auth");
 
 const updateRouter = express.Router()
 const jsonBodyParser = express.json()
 
+const serializeUser = user => ({
+  id: user.id,
+  username: user.username,
+  name: user.name,
+  password: user.password,
+  new_password: user.new_password,
+});
+
+
 updateRouter
-  .use(requireAuth)
+  //.use(requireAuth)
   .route('/')
   .all((req, res, next) => {
+    //const { id, username, password, new_password } = req.body
     const db = req.app.get('db')
-    const id = req.body.id
+    const id = req.user.id
+
+    console.log(`req.user.id = ${req.user.id}`)
+    console.log(`req.user.username = ${req.user.username}`)
+    console.log(`req.user.password = ${req.user.password}`)
+    console.log(`req.user.newpassword = ${req.user.newpassword}`)
+  
     UpdateService.getById(db, id)
       .then(user => {
         if(!user) {
           return res.status(404).json({error: {message: `User does not exist`}})
         }
+        console.log(res.user)
         res.user = user
         next()
       })
