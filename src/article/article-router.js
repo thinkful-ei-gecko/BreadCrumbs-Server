@@ -42,6 +42,7 @@ articleRouter
   .route('/oven')
   .all(requireAuth)
   .get((req, res, next) => {
+    console.log(req.user)
     const db = req.app.get('db');
     ArticleService.getAllDbArticles(db)
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
@@ -52,6 +53,7 @@ articleRouter
   .all(requireAuth)
   .route('/')
   .get((req, res, next) => {
+    
     const db = req.app.get('db');
     const id = req.user.id;
     ArticleService.getUserArticles(db, id)
@@ -90,6 +92,51 @@ articleRouter
           .status(201)
           .location(path.posix.join(req.originalUrl))
           .json(articles.map(serializeArticle));
+      })
+      .catch(next);
+  });
+
+articleRouter
+  .route('/savedarticles')
+  .all(requireAuth)
+  .get((req, res, next) => {
+    console.log(req.user)
+    const db = req.app.get('db');
+    const id = req.user.id;
+    ArticleService.getSavedArticles(db, id)
+      .then(savedArticles => res.json(savedArticles))
+      .catch(next);
+  })
+  .post(requireAuth,jsonParser, (req, res, next) => {
+    console.log('*****')
+    const{
+      article_id,
+      user_id
+    } = req.body;
+    const userArticle = {article_id,user_id}
+    const db = req.app.get('db');
+
+    ArticleService.insertSavedArticle(db, article_id,user_id)
+      .then(articles => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl))
+          .json(articles);
+      })
+    
+      .catch(next);
+  });
+
+articleRouter
+  .use(requireAuth)
+  .route('/savedarticles/:id')
+  .delete((req, res, next) => {
+    const db = req.app.get('db');
+    const id = req.params.id;
+
+    ArticleService.deleteSavedArticle(db, id)
+      .then(() => {
+          
       })
       .catch(next);
   });

@@ -15,12 +15,13 @@ const CommentService = {
   },
   getCommentsForArticle(db, article_id) {
     return db
-      .select('*')
+      .select('comment.id','comment.comment','comment.date_commented','comment.article_id','user.username','user.name','user.id')
       .from('comment')
       .leftJoin('user','comment.user_id', '=', 'user.id')
       .where({
         'comment.article_id':article_id
-      });
+      })
+      .groupBy('comment.id','user.id');
   },
   getCommentById(db, id) {
     return db
