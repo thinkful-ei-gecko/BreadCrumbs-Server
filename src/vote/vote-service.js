@@ -8,13 +8,11 @@ const VoteService = {
       
   },
 
-
   getVoteData(db, user_id, article_id) {
     return db
       .from('article')
       .innerJoin('article_vote', 'article.id', '=', 'article_vote.article_id')
       .select('*')
-      // .select('article_vote.user_id', 'article_vote.article_id', 'article.vote_count', 'article_vote.vote_type')
       .where({
         'article_vote.user_id': user_id,
         'article.id': article_id
@@ -22,9 +20,7 @@ const VoteService = {
   },
 
   updateVoteType(db, vote_id,newVoteType) {
-    // console.log('inside updateVotetype',newVoteType)
     return db('article_vote') 
-      // .from('article_vote') 
       .where({id: vote_id})
       .update({vote_type: newVoteType})
       .then();   
@@ -37,31 +33,6 @@ const VoteService = {
       .update({vote_count: newVoteCount})
       .then();
   },
-
-  //  updateVoteData(db, user_id, article_id, newVoteType, newVoteCount){
-  //    await db
-  //   this.updateVoteType(db, user_id, article_id, newVoteType);
-  //   return await this.updateVoteCount(db, user_id, article_id, newVoteCount);
-
-  //  }
-
-
-  
-
-  // updateVoteData(db, user_id, article_id, newVoteCount, newVoteType) {
-  //   return db
-  //     .from('article_vote')
-  //     .where({
-  //       'article_vote.user_id': user_id,
-  //       'article.id': article_id
-  //     })
-  //     .leftJoin('article', 'article_vote.article_id', '=', 'article.id')
-  //     .update({
-  //       'article.vote_count': newVoteCount,
-  //       'article_save.vote_type': newVoteType
-  //     })
-  //   },
-  
 };
 
 module.exports = VoteService;

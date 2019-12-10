@@ -22,7 +22,6 @@ const serializeArticle = article => ({
   content: xss(article.content),
 });
 
-
 saveRouter
   .use(requireAuth)
   .route('/')

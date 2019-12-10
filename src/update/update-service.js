@@ -3,7 +3,7 @@ const xss = require('xss');
 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 
-const UserService = {
+const UpdateService = {
   hasUserWithUserName(db, username) {
     return db('user')
       .where({ username })
@@ -57,8 +57,8 @@ const UserService = {
   updatePassword(db, id, new_password) {
     return db
       .from('user')
-      .where({'id': id})
-      .update({'password': new_password})
+      .where({id})
+      .update({password: new_password})
   },
   deleteUser(db, id){
     return db
@@ -67,4 +67,4 @@ const UserService = {
   }
 }
 
-module.exports = UserService
+module.exports = UpdateService

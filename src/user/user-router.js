@@ -64,11 +64,12 @@ userRouter
   })
 
 userRouter
+  .use(requireAuth)
   .route('/update')
   .all((req, res, next) => {
     const db = req.app.get('db')
     const id = req.body.id
-    UsersService.getById(db, id)
+    UserService.getById(db, id)
       .then(user => {
         if(!user) {
           return res.status(404).json({error: {message: `User does not exist`}})
