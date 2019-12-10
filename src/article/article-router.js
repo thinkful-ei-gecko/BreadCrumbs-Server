@@ -100,7 +100,7 @@ articleRouter
   .route('/savedarticles')
   .all(requireAuth)
   .get((req, res, next) => {
-    console.log(req.user)
+    
     const db = req.app.get('db');
     const id = req.user.id;
     ArticleService.getSavedArticles(db, id)
@@ -131,42 +131,14 @@ articleRouter
   .use(requireAuth)
   .route('/savedarticles/:id')
   .delete((req, res, next) => {
+    console.log(req.user.id)
     const db = req.app.get('db');
     const id = req.params.id;
-
-    ArticleService.deleteSavedArticle(db, id)
-      .then(() => {
-          
-      })
-      .catch(next);
-  });
-
-articleRouter
-  .use(requireAuth)
-  .route('/:articleId')
-  .all((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.params.articleId;
-    ArticleService.getArticleById(db, id)
-      .then(article => {
-        if(!article) {
-          return res.status(404).json({error: {message: 'Article does not exist'}});
-        }
-        res.article = article;
-        next();
-      })
-      .catch(next);
-  })
-  .get((req, res, next) => {
-    res.status(200).json(res.article);
-  })
-  .delete((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.params.articleId;
-
-    ArticleService.deleteArticle(db, id)
-      .then(() => {
-          
+    const user_id=req.user.id;
+    ArticleService.deleteSavedArticle(db, id,user_id)
+      .then(articlesAfterDelete => {
+        res.status(201)
+          .json(articlesAfterDelete);
       })
       .catch(next);
   });

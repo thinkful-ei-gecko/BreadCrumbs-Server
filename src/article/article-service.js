@@ -15,18 +15,18 @@ const ArticleService = {
       .then(()=>ArticleService.getAllDbArticles(db));
   },
  
-  deleteSavedArticle(db, id) {
+  deleteSavedArticle(db, id,user_id) {
     return db
       .from('save')
       .where({ id })
       .delete()
-    
+      .then(()=>ArticleService.getSavedArticles(db,user_id))
   },
   getSavedArticles(db, user_id) {
     return db
-      .select('*')
+      .select('*','save.id')
       .from('save')
-      .leftJoin('article','save.article_id', '=', 'article.id')
+      .fullOuterJoin('article','save.article_id', '=', 'article.id')
       .where('save.user_id', user_id);
       
   },
