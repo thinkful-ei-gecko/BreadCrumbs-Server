@@ -249,8 +249,7 @@ function cleanTables(db) {
         bake
         RESTART IDENTITY CASCADE;
       `
-    
-  );
+      );
 }
 
 
