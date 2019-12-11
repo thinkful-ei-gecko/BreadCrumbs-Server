@@ -1,7 +1,11 @@
 const ArticleService = {
 
   getAllDbArticles(db) {
-    return db
+    // db.select('*')
+    //             .from('article')
+    //             .where({'article.id':'410d5894-4946-4c1a-abad-552642dc55fc'})
+    //             .then((art)=>console.log("Vote Count: ",art[0].vote_count));
+     return db
       .select('*')
       .from('article')
       .orderBy('vote_count', 'desc');
