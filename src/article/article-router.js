@@ -9,8 +9,6 @@ const jsonParser = express.json();
 
 const serializeArticle = article => ({
   id: article.id,
-  // user_id: article.user_id,
-  // date_baked: xss(article.date_baked),
   vote_count:article.vote_count,
   author: xss(article.author),
   title: xss(article.title),
@@ -22,26 +20,12 @@ const serializeArticle = article => ({
   content: xss(article.content),
 });
 
-// const serializeArticle = article => ({
-//   id: article.id,
-//   user_id: article.user_id,
-//   date_baked: xss(article.date_baked),
-//   date_saved:xss(article.date_baked),
-//   vote_count: xss(article.vote_count),
-//   author: xss(article.author),
-//   title: xss(article.title),
-//   description: xss(article.description),
-//   source_name: xss(article.source_name),
-//   url: xss(article.url),
-//   url_to_image: xss(article.url_to_image),
-//   publish_at: xss(article.publish_at),
-//   content: xss(article.content),
-// });
 
 articleRouter
   .route('/oven')
   .all(requireAuth)
   .get((req, res, next) => {
+    console.log(req.user)
     const db = req.app.get('db');
     ArticleService.getAllDbArticles(db)
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
@@ -52,6 +36,7 @@ articleRouter
   .all(requireAuth)
   .route('/')
   .get((req, res, next) => {
+    
     const db = req.app.get('db');
     const id = req.user.id;
     ArticleService.getUserArticles(db, id)
@@ -95,31 +80,48 @@ articleRouter
   });
 
 articleRouter
-  .use(requireAuth)
-  .route('/:articleId')
-  .all((req, res, next) => {
+  .route('/savedarticles')
+  .all(requireAuth)
+  .get((req, res, next) => {
+    
     const db = req.app.get('db');
-    const id = req.params.articleId;
-    ArticleService.getArticleById(db, id)
-      .then(article => {
-        if(!article) {
-          return res.status(404).json({error: {message: 'Article does not exist'}});
-        }
-        res.article = article;
-        next();
-      })
+    const id = req.user.id;
+    ArticleService.getSavedArticles(db, id)
+      .then(savedArticles => res.json(savedArticles))
       .catch(next);
   })
-  .get((req, res, next) => {
-    res.status(200).json(res.article);
-  })
-  .delete((req, res, next) => {
+  .post(requireAuth,jsonParser, (req, res, next) => {
+    console.log('*****')
+    const{
+      article_id,
+      user_id
+    } = req.body;
+    const userArticle = {article_id,user_id}
     const db = req.app.get('db');
-    const id = req.params.articleId;
 
-    ArticleService.deleteArticle(db, id)
-      .then(() => {
-          
+    ArticleService.insertSavedArticle(db, article_id,user_id)
+      .then(articles => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl))
+          .json(articles);
+      })
+    
+      .catch(next);
+  });
+
+articleRouter
+  .use(requireAuth)
+  .route('/savedarticles/:id')
+  .delete((req, res, next) => {
+    console.log(req.user.id)
+    const db = req.app.get('db');
+    const id = req.params.id;
+    const user_id=req.user.id;
+    ArticleService.deleteSavedArticle(db, id,user_id)
+      .then(articlesAfterDelete => {
+        res.status(201)
+          .json(articlesAfterDelete);
       })
       .catch(next);
   });

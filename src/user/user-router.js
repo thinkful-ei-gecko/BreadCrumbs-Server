@@ -63,6 +63,7 @@ userRouter
     });
   })
 
+<<<<<<< HEAD
 userRouter
   .route('/update')
   .all((req, res, next) => {
@@ -132,4 +133,6 @@ userRouter
   })
 
 
+=======
+>>>>>>> 69679579c3344440257630580c45ad2c90e8a399
 module.exports = userRouter

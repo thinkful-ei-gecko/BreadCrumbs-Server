@@ -17,42 +17,21 @@ const serializeComment = comment => ({
   article_id: xss(comment.article_id),
 });
 
-commentRouter
-  .use(requireAuth)
-  .route('/')
+
+commentRouter.route('/:article_id/comments/')
+  .all(requireAuth)
   .get((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.user.id;
-    CommentService.getUserComments(db, id)
-      .then(comments => res.status(200).json(comments.map(serializeComment)))
-      .catch(next);
-  })
-  .post(requireAuth,jsonParser, (req, res, next) => {
-    const {
-      user_id,
-      comment,
-      article_id
-    } = req.body;
-
-    const newcomment = {
-      user_id,
-      comment,
-      article_id
-    };
-
-    const db = req.app.get('db');
-
-    CommentService.insertComment(db, newcomment)
-      .then(comment => {
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `/${comment.id}`))
-          .json(serializeComment(comment));
+    CommentService.getCommentsForArticle(
+      req.app.get('db'),
+      req.params.article_id
+    )
+      .then(comments => {
+        res.json(comments);
       })
       .catch(next);
   });
 
-commentRouter
+  commentRouter
   .use(requireAuth)
   .route('/:commentId')
   .all((req, res, next) => {
@@ -81,17 +60,43 @@ commentRouter
       })
       .catch(next);
   });
-commentRouter.route('/:article_id/comments/')
-  .all(requireAuth)
+
+commentRouter
+  .use(requireAuth)
+  .route('/')
   .get((req, res, next) => {
-    CommentService.getCommentsForArticle(
-      req.app.get('db'),
-      req.params.article_id
-    )
-      .then(comments => {
-        res.json(comments);
+    const db = req.app.get('db');
+    const id = req.user.id;
+    CommentService.getAllComments(db, id)
+      .then(comments => res.status(200).json(comments.map(serializeComment)))
+      .catch(next);
+  })
+  .post(requireAuth,jsonParser, (req, res, next) => {
+    const {
+      user_id,
+      comment,
+      article_id
+    } = req.body;
+
+    const newcomment = {
+      user_id,
+      comment,
+      article_id
+    };
+
+    const db = req.app.get('db');
+
+    CommentService.insertComment(db, newcomment)
+      .then(comment => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${comment.id}`))
+          .json(serializeComment(comment));
       })
       .catch(next);
   });
+
+
+
 
 module.exports = commentRouter;

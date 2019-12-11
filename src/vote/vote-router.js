@@ -56,10 +56,6 @@ voteRouter
           }
         }  
         
-        // console.log('oldVoteType',oldVoteType)
-        // console.log('newVoteCount',newVoteCount)
-        // console.log('newVoteType',newVoteType)
-
         VoteService.updateVoteType(db, vote_id, newVoteType)
         VoteService.updateVoteCount(db, article_id, newVoteCount)      
       })

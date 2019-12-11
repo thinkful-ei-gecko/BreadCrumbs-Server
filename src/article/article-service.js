@@ -5,20 +5,6 @@ const ArticleService = {
       .select('*')
       .from('article');
   },
-  getUserArticles(db, user_id) {
-    return db
-      .from('article')
-      .select('*')
-      .where('article.user_id', user_id)
-      .orderBy('vote_count', 'desc');
-  },
-  getArticleById(db, id) {
-    return db
-      .select('*')
-      .from('article')
-      .where({ id })
-      .first();
-  },
   insertArticle(db, savedArticle,user_id) {
     console.log(user_id)
     return db
@@ -28,12 +14,29 @@ const ArticleService = {
       .then(()=>ArticleService.getAllDbArticles(db));
   },
  
-  deleteArticle(db, id) {
+  deleteSavedArticle(db, id,user_id) {
     return db
-      .from('article')
+      .from('save')
       .where({ id })
-      .delete();
-  }
+      .delete()
+      .then(()=>ArticleService.getSavedArticles(db,user_id))
+  },
+  getSavedArticles(db, user_id) {
+    return db
+      .select('*','save.id')
+      .from('save')
+      .fullOuterJoin('article','save.article_id', '=', 'article.id')
+      .where('save.user_id', user_id);
+      
+  },
+
+  insertSavedArticle(db, article_id,user_id) {
+    return db
+      .insert({article_id:article_id,user_id:user_id})
+      .into('save')
+      .returning('*')
+      .then();
+  },
 };
 
 module.exports = ArticleService;
