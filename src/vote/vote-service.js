@@ -1,22 +1,21 @@
+// const ArticleService = require('../article/article-service');
 const VoteService = {
-  insertArticleVote(db,article_id,user_id){
-    console.log('inside insertArticle',article_id,user_id)
+  checkArticleVote(db,article_id,user_id){
     return db
-      .insert({'article_id':article_id,'user_id':user_id})
+      .from('article_vote')
+      .select('*')
+      .where({
+        'article_vote.article_id':article_id,
+        'article_vote.user_id':user_id
+      });
+  },
+
+  insertArticleVote(db,article_id,user_id,vote_type){
+    return db
+      .insert({'article_id':article_id,'user_id':user_id,'vote_type':vote_type})
       .into('article_vote')
       .returning('*')
       
-  },
-
-  getVoteData(db, user_id, article_id) {
-    return db
-      .from('article')
-      .innerJoin('article_vote', 'article.id', '=', 'article_vote.article_id')
-      .select('*')
-      .where({
-        'article_vote.user_id': user_id,
-        'article.id': article_id
-      });  
   },
 
   updateVoteType(db, vote_id,newVoteType) {
@@ -26,11 +25,17 @@ const VoteService = {
       .then();   
   },
 
-  updateVoteCount(db, article_id, newVoteCount) {
-    console.log('inside updateVoteCount',newVoteCount)
+  incrementVoteCount(db, article_id) {
     return db('article')
       .where({id: article_id})
-      .update({vote_count: newVoteCount})
+      .increment('vote_count', 1)
+      .then();
+  },
+
+  decrementVoteCount(db, article_id) {
+    return db('article')
+      .where({id: article_id})
+      .decrement('vote_count', 1)
       .then();
   },
 };
