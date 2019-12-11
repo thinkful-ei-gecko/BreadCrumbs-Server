@@ -23,6 +23,9 @@ const AuthService = {
       algorithms: ['HS256'],
     })
   },
+  hashPassword(password) {
+    return bcrypt.hash(password, 12)
+  }
 }
 
 module.exports = AuthService

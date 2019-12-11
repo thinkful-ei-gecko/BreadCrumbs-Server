@@ -36,7 +36,7 @@ const ArticleService = {
       .into('save')
       .returning('*')
       .then();
-  },
+  }
 };
 
 module.exports = ArticleService;
