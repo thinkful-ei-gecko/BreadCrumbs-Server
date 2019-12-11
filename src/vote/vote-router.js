@@ -24,8 +24,8 @@ voteRouter
         }
         
         if(result.length !== 0 && req.body.vote_type === result[0].vote_type){
-          // res.status(404).json({error: {message: 'Already voted'}});
-          console.log('Already voted')
+          res.status(404).json({error: {message: 'Already voted'}});
+          //console.log('Already voted')
         }
         if(result.length !== 0 && req.body.vote_type !== result[0].vote_type){
           VoteService.updateVoteType(db, result[0].id, req.body.vote_type)
