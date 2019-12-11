@@ -68,7 +68,7 @@ userRouter
   .all((req, res, next) => {
     const db = req.app.get('db')
     const id = req.body.id
-    UsersService.getById(db, id)
+    UserService.getById(db, id)
       .then(user => {
         if(!user) {
           return res.status(404).json({error: {message: `User does not exist`}})
@@ -115,10 +115,10 @@ userRouter
     .catch(next)
   })
   .patch(jsonBodyParser, (req, res, next) => {
-    const { new_password } = req.body
-    const newPassword = {new_password}
+    const { new_password } = req.body;
+    const newPassword = {new_password};
     if(!new_password) {
-      next()
+      next();
     }
     UserService.updatePassword(
       req.app.get('db'),
@@ -126,7 +126,7 @@ userRouter
       newPassword
     )
     .then(numRowsAffected => {
-      res.status(204).end()
+      res.status(204).end();
     })
     .catch(next)
   })
