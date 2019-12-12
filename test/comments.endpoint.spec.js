@@ -61,7 +61,7 @@ describe('Article Endpoints', function() {
     beforeEach(() =>
       db.into('comment').insert(testComments)
     );
-    it.only('Posts comment,responding with 201 and with new comment',()=>{
+    it('Posts comment,responding with 201 and with new comment',()=>{
       const userId=testUsers[0].id;
       console.log(userId);
       const newComment = {

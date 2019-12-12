@@ -7,7 +7,7 @@ describe('Article Endpoints', function() {
   const {
     testUsers,
     testArticles,
-    testComments,
+    testArticleVote,
   } = helpers.makeArticlesFixtures();
 
   
@@ -24,18 +24,35 @@ describe('Article Endpoints', function() {
   before('clean the table', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
   afterEach('cleanup', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
 
-  describe('GET /api/vote', () => {
-    context('Given no articles in the database', () => {
-      
+  describe('PATCH /api/vote', () =>{
+
+    context('Given there are habits in the database',()=>{
       beforeEach(() =>
         db.into('user').insert(testUsers)
       );
-      it('responds with 200 and an empty list', () => {
+      beforeEach(() =>
+        db.into('article').insert(testArticles)
+      );
+      beforeEach(() =>
+        db.into('article_vote').insert(testArticleVote)
+      );
+      it.only('responds with 201 and updates the vote type', () => {
+        const userId=testUsers[0].id;
+        
+        const updateVote = {
+          user_id:userId,
+          article_id:'a273b067-19f4-4bb8-b84f-4408cc760e3c',
+          vote_type:true
+        };
         return supertest(app)
-          .get('/api/article/oven')
+          .patch('/api/vote')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-          .expect(200, []);
+          .send(updateVote)
+          .expect(201);
+       
       });
 
     });
+  });
+
 });
