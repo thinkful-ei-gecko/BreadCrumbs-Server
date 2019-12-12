@@ -32,7 +32,7 @@ updateRouter
     res.json(UpdateService.serializeUser(res.user));
   })
   .delete((req, res, next) => {
-    UpdateService.deleteUser(req.app.get("db"), req.body.id)
+    UpdateService.deleteUser(req.app.get("db"), req.body.user_id)
       .then(numRowsAffected => {
         return res.status(204).end();
       })
