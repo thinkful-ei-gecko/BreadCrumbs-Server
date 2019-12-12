@@ -74,7 +74,7 @@ describe('Article Endpoints', function() {
         author:'test author',
         content:'test content',
         description:'test description',
-        publish_at:new Date('2019-11-18T19:31:09Z'),
+        publish_at:'2019-11-18T19:31:09Z',
         source_name:'test source',
         title:'test title',
         url:'test url1',
@@ -171,35 +171,36 @@ describe('Article Endpoints', function() {
 
   });
 
-  // describe('DELETE /api/article/savedarticles/:id', () => {
+  describe('DELETE /api/article/savedarticles/:id', () => {
    
-  //   context('Given there are articles in the database', () => {
-  //     beforeEach(() =>
-  //       db.into('user').insert(testUsers)
-  //     );
-  //     beforeEach(() =>
-  //       db.into('article').insert(testArticles)
-  //     );
-  //     beforeEach(() =>
-  //       db.into('save').insert(testSaveArticles)
-  //     );
-  //     it('responds with 201 and removes the article', () => {
-  //       const userId=testUsers[0].id;
-  //       const idToRemove = 'c95d3a01-de4c-4a6d-91e2-9fd4f9a96ece';
-  //       const expectedHabits = expectedHabitList.filter(habit => habit.habit_id !== idToRemove);
-  //       return supertest(app)
-  //         .delete(`/api/article/savedarticles/${idToRemove}`)
-  //         .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-  //         .expect(201)
-  //         .then(res =>
-  //           supertest(app)
-  //             .get('/api/habits')
-  //             .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-  //             .expect(expectedHabits)
-  //         );
-  //     });
-  //   });
-  // });
+    context('Given there are articles in the database', () => {
+      beforeEach(() =>
+        db.into('user').insert(testUsers)
+      );
+      beforeEach(() =>
+        db.into('article').insert(testArticles)
+      );
+      beforeEach(() =>
+        db.into('save').insert(testSaveArticles)
+      );
+      it.only('responds with 201 and removes the article', () => {
+        const userId=testUsers[0].id;
+        const idToRemove = 'c95d3a01-de4c-4a6d-91e2-9fd4f9a96ece';
+        const expectedSavedArticleList=helpers.makeSavedArticleList(userId,testSaveArticles,testArticles);
+        const expectedArticlesAfterDelete = expectedSavedArticleList.filter(article => article.id !== idToRemove);
+        return supertest(app)
+          .delete(`/api/article/savedarticles/${idToRemove}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+          .expect(201)
+          .then(res =>
+            supertest(app)
+              .get('/api/article/savedarticles')
+              .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+              .expect(expectedArticlesAfterDelete)
+          );
+      });
+    });
+  });
 
 
 });
