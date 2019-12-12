@@ -1,11 +1,7 @@
 const ArticleService = {
 
   getAllDbArticles(db) {
-    // db.select('*')
-    //             .from('article')
-    //             .where({'article.id':'410d5894-4946-4c1a-abad-552642dc55fc'})
-    //             .then((art)=>console.log("Vote Count: ",art[0].vote_count));
-     return db
+    return db
       .select('*')
       .from('article');
   },
@@ -15,7 +11,8 @@ const ArticleService = {
       .insert(savedArticle)
       .into('article')
       .returning('*')
-      .then(()=>ArticleService.getAllDbArticles(db));
+      .then(()=>ArticleService.getAllDbArticles(db))
+      .orderBy('vote_count', 'desc');
   },
  
   deleteSavedArticle(db, id,user_id) {
