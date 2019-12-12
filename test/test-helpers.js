@@ -151,26 +151,31 @@ function makeArticleVoteArray(users,articles){
       id:'9a2285ae-0dd9-4f12-a5ca-ec7b16134c7a',
       user_id:users[0].id,
       article_id:articles[0].id,
+      vote_type:false
     },
     {
       id:'9219f1b2-94ae-4ed7-810f-9ca81b072917',
       user_id:users[0].id,
       article_id:articles[1].id,
+      vote_type:true
     },
     {
       id:'f78b6729-a18b-4ab8-ace1-589b800d355a',
       user_id:users[1].id,
       article_id:articles[2].id,
+      vote_type:false
     },
     {
       id:'5287c45b-d377-4ff2-abeb-d33cb4a53039',
       user_id:users[2].id,
       article_id:articles[3].id,
+      vote_type:null
     },
     {
       id:'573be0a0-c529-4fc7-8daf-fc9d5cb159c9',
       user_id:users[3].id,
       article_id:articles[4].id,
+      vote_type:null
     },
   ];
 }
