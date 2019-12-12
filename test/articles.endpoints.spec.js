@@ -142,9 +142,9 @@ describe('Article Endpoints', function() {
     beforeEach(() =>
       db.into('save').insert(testSaveArticles)
     );
-    it.only('Saves new article,responding with 201 and articlelist with new article',()=>{
+    it('Saves new article,responding with 201 and articlelist with new article',()=>{
       const userId=testUsers[0].id;
-      console.log(userId)
+      console.log(userId);
       const saveArticle = {
         user_id:userId,
         article_id:'0a3891fb-c2b0-4fe7-b065-62ff1029ebcb' ,
@@ -155,7 +155,6 @@ describe('Article Endpoints', function() {
         .send(saveArticle)
         .expect(201)
         .expect(res=>{
-          console.log(res.body[0])
           expect(res.body[0]).to.have.property('id');
           expect(res.body[0].user_id).to.eql(saveArticle.user_id);
           expect(res.body[0].article_id).to.eql(saveArticle.article_id);
@@ -171,6 +170,37 @@ describe('Article Endpoints', function() {
     });
 
   });
+
+  // describe('DELETE /api/article/savedarticles/:id', () => {
+   
+  //   context('Given there are articles in the database', () => {
+  //     beforeEach(() =>
+  //       db.into('user').insert(testUsers)
+  //     );
+  //     beforeEach(() =>
+  //       db.into('article').insert(testArticles)
+  //     );
+  //     beforeEach(() =>
+  //       db.into('save').insert(testSaveArticles)
+  //     );
+  //     it('responds with 201 and removes the article', () => {
+  //       const userId=testUsers[0].id;
+  //       const idToRemove = 'c95d3a01-de4c-4a6d-91e2-9fd4f9a96ece';
+  //       const expectedHabits = expectedHabitList.filter(habit => habit.habit_id !== idToRemove);
+  //       return supertest(app)
+  //         .delete(`/api/article/savedarticles/${idToRemove}`)
+  //         .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+  //         .expect(201)
+  //         .then(res =>
+  //           supertest(app)
+  //             .get('/api/habits')
+  //             .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+  //             .expect(expectedHabits)
+  //         );
+  //     });
+  //   });
+  // });
+
 
 });
 

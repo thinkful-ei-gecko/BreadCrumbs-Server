@@ -16,7 +16,8 @@ const serializeArticle = article => ({
   source_name: xss(article.source_name),
   url: xss(article.url),
   url_to_image: xss(article.url_to_image),
-  publish_at: xss(article.publish_at),
+  posted_at:article.posted_at,
+  publish_at: article.publish_at,
   content: xss(article.content),
 });
 
