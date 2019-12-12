@@ -18,7 +18,7 @@ const serializeComment = comment => ({
 });
 
 
-commentRouter.route('/:article_id/comments/')
+commentRouter.route('/:article_id')
   .all(requireAuth)
   .get((req, res, next) => {
     CommentService.getCommentsForArticle(
@@ -32,45 +32,8 @@ commentRouter.route('/:article_id/comments/')
   });
 
 commentRouter
-  .use(requireAuth)
-  .route('/:commentId')
-  .all((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.params.commentId;
-    CommentService.getcommentById(db, id)
-      .then(comment => {
-        if(!comment) {
-          return res.status(404).json({error: {message: 'comment does not exist'}});
-        }
-        res.comment = comment;
-        next();
-      })
-      .catch(next);
-  })
-  .get((req, res, next) => {
-    res.status(200).json(res.comment);
-  })
-  .delete((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.params.commentId;
-
-    CommentService.deletecomment(db, id)
-      .then(() => {
-        res.status(204).end();
-      })
-      .catch(next);
-  });
-
-commentRouter
-  .use(requireAuth)
+  .all(requireAuth)
   .route('/')
-  .get((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.user.id;
-    CommentService.getAllComments(db, id)
-      .then(comments => res.status(200).json(comments.map(serializeComment)))
-      .catch(next);
-  })
   .post(requireAuth,jsonParser, (req, res, next) => {
     const {
       user_id,

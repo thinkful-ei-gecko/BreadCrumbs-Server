@@ -28,4 +28,4 @@ const AuthService = {
   }
 }
 
-module.exports = AuthService
+module.exports = AuthService;

@@ -40,31 +40,9 @@ const UserService = {
       id: user.id,
       name: xss(user.name),
       username: xss(user.username),
-    }
+    };
   },
-  getById(db, id) {
-    return db
-      .from('user')
-      .select('*')
-      .where('id', id)
-  },
-  updateFields(db, id, updateFields) {
-    return db
-      .from('user')
-      .where({id})
-      .update(updateFields)
-  },
-  updatePassword(db, id, new_password) {
-    return db
-      .from('user')
-      .where({'id': id})
-      .update({'password': new_password})
-  },
-  deleteUser(db, id){
-    return db
-      .where({'id': id})
-      .del()
-  }
-}
 
-module.exports = UserService
+};
+
+module.exports = UserService;

@@ -1,9 +1,5 @@
 const CommentService = {
-  getAllComments(db) {
-    return db
-      .select('*')
-      .from('comment')
-  },
+
   insertComment(db, newComment) {
     return db
       .insert({'article_id':newComment.article_id,'user_id':newComment.user_id,'comment':newComment.comment})
@@ -24,23 +20,7 @@ const CommentService = {
       .groupBy('comment.id','user.id')
       .orderBy('comment.date_commented', 'desc');
   },
-  getCommentById(db, id) {
-    return db
-      .from('comment')
-      .select('*')
-      .where('id', id)
-      .first()
-  },
-  deleteComment(db, id) {
-    return db('comment')
-      .where({ id })
-      .delete()
-  },
-  updateComment(db, id, updateFields) {
-    return db('comment')
-      .where({ id })
-      .update(updateFields)
-  },
+
 
 };
 

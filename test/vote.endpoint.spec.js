@@ -36,7 +36,7 @@ describe('Article Endpoints', function() {
       beforeEach(() =>
         db.into('article_vote').insert(testArticleVote)
       );
-      it.only('responds with 201 and updates the vote type', () => {
+      it('responds with 201 and updates the vote type', () => {
         const userId=testUsers[0].id;
         
         const updateVote = {

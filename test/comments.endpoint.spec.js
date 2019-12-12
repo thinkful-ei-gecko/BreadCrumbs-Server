@@ -24,7 +24,7 @@ describe('Article Endpoints', function() {
   before('clean the table', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
   afterEach('cleanup', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
 
-  describe('GET /api/comment/:article_id/comments', () => {
+  describe('GET /api/comment/:article_id', () => {
     context('Given articles in the database', () => {
       beforeEach(() =>
         db.into('user').insert(testUsers)
@@ -38,7 +38,7 @@ describe('Article Endpoints', function() {
       it('responds with 200 and gets comments for article by artcle id', () => {
         const articleId ='a273b067-19f4-4bb8-b84f-4408cc760e3c';
         return supertest(app)
-          .get('/api/comment/a273b067-19f4-4bb8-b84f-4408cc760e3c/comments')
+          .get(`/api/comment/${articleId}`)
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200)
           .expect(res=>{
