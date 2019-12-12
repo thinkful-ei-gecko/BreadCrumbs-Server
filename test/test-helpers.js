@@ -41,6 +41,7 @@ function makeArticlesArray(){
       content:'content1',
       description:'description1',
       id:'a273b067-19f4-4bb8-b84f-4408cc760e3c',
+      posted_at: new Date('2019-12-12T19:33:51.426Z'),
       publish_at:new Date('2019-11-18T19:31:09Z'),
       source_name:'source1',
       title:'title1',
@@ -54,6 +55,7 @@ function makeArticlesArray(){
       content:'content2',
       description:'description2',
       id:'52204397-f9bf-42ce-a88f-1e495aa69c5d',
+      posted_at: new Date('2019-12-12T19:33:51.426Z'),
       publish_at:new Date('2019-11-19T19:31:09Z'),
       source_name:'source2',
       title:'title2',
@@ -65,6 +67,7 @@ function makeArticlesArray(){
       content:'content3',
       description:'description3',
       id:'0a3891fb-c2b0-4fe7-b065-62ff1029ebcb',
+      posted_at: new Date('2019-12-12T19:33:51.426Z'),
       publish_at:new Date('2019-11-20T19:31:09Z'),
       source_name:'source3',
       title:'title3',
@@ -77,6 +80,7 @@ function makeArticlesArray(){
       content:'content1',
       description:'description4',
       id:'832f989a-5a0b-4f10-bc45-36733e5e9ee1',
+      posted_at: new Date('2019-12-12T19:33:51.426Z'),
       publish_at:new Date('2019-11-18T19:31:09Z'),
       source_name:'source4',
       title:'title4',
@@ -89,6 +93,7 @@ function makeArticlesArray(){
       content:'content5',
       description:'description5',
       id:'9a2285ae-0dd9-4f12-a5ca-ec7b16134c7a',
+      posted_at: new Date('2019-12-12T19:33:51.426Z'),
       publish_at:new Date('2019-11-18T19:31:09Z'),
       source_name:'source5',
       title:'title5',
@@ -214,6 +219,21 @@ function makeArticlesFixtures(){
   return {testUsers, testArticles, testComments,testArticleVote,testSaveArticles};
 }
 
+function makeSavedArticleList(userId, savedArticles, articles) {
+  const articlesMatchingUserId = savedArticles.filter(
+    savedArticle => savedArticle.user_id === userId
+  );
+
+  const matchingArticles = [];
+  matchingArticles.push(
+    ...articlesMatchingUserId.map(uart => {
+      return articles.filter(article => article.id === uart.article_id)[0];
+    })
+  );
+  let matchingArticlesWithUserId= matchingArticles.map((item,i)=>Object.assign({},item,articlesMatchingUserId[i]))
+  return matchingArticlesWithUserId
+}
+
 function seedUsers(db, users) {
   const usersWithPassword = users.map((user) => ({
     ...user,
@@ -269,6 +289,7 @@ module.exports={
   makeArticleVoteArray,
   makeSaveArticlesArray,
   makeArticlesFixtures,
+  makeSavedArticleList,
   seedUsers,
   seedArticles,
   seedComments,
