@@ -37,64 +37,65 @@ function makeUsersArray(){
 function makeArticlesArray(){
   return[
     {
-      id:'a273b067-19f4-4bb8-b84f-4408cc760e3c',
-      vote_count:1,
       author:'author1',
-      title:'title1',
+      content:'content1',
       description:'description1',
+      id:'a273b067-19f4-4bb8-b84f-4408cc760e3c',
+      publish_at:new Date('2019-11-18T19:31:09Z'),
       source_name:'source1',
+      title:'title1',
       url:'url1',
       url_to_image:'url_to_image1',
-      publish_at:new Date('2019-11-18T19:31:09Z'),
-      content:'content1'
+      vote_count:1, 
     },
     {
-      id:'52204397-f9bf-42ce-a88f-1e495aa69c5d',
       vote_count:2,
       author:'author2',
-      title:'title2',
+      content:'content2',
       description:'description2',
-      source_name:'source2',
-      url:'url2',
-      url_to_image:'url_to_image2',
+      id:'52204397-f9bf-42ce-a88f-1e495aa69c5d',
       publish_at:new Date('2019-11-19T19:31:09Z'),
-      content:'content2'
+      source_name:'source2',
+      title:'title2',
+      url:'url2',
+      url_to_image:'url_to_image2',  
     },
     {
-      id:'0a3891fb-c2b0-4fe7-b065-62ff1029ebcb',
-      vote_count:3,
       author:'author3',
-      title:'title3',
+      content:'content3',
       description:'description3',
+      id:'0a3891fb-c2b0-4fe7-b065-62ff1029ebcb',
+      publish_at:new Date('2019-11-20T19:31:09Z'),
       source_name:'source3',
+      title:'title3',
       url:'url3',
       url_to_image:'url_to_image3',
-      publish_at:new Date('2019-11-20T19:31:09Z'),
-      content:'content3'
+      vote_count:3,   
     },
     {
-      id:'832f989a-5a0b-4f10-bc45-36733e5e9ee1',
-      vote_count:4,
       author:'author4',
-      title:'title4',
+      content:'content1',
       description:'description4',
+      id:'832f989a-5a0b-4f10-bc45-36733e5e9ee1',
+      publish_at:new Date('2019-11-18T19:31:09Z'),
       source_name:'source4',
+      title:'title4',
       url:'url4',
       url_to_image:'url_to_image4',
-      publish_at:new Date('2019-11-18T19:31:09Z'),
-      content:'content1'
+      vote_count:4,
     },
     {
-      id:'9a2285ae-0dd9-4f12-a5ca-ec7b16134c7a',
-      vote_count:5,
       author:'author5',
-      title:'title5',
+      content:'content5',
       description:'description5',
+      id:'9a2285ae-0dd9-4f12-a5ca-ec7b16134c7a',
+      publish_at:new Date('2019-11-18T19:31:09Z'),
       source_name:'source5',
+      title:'title5',
       url:'url5',
       url_to_image:'url_to_image5',
-      publish_at:new Date('2019-11-18T19:31:09Z'),
-      content:'content5'
+      vote_count:5,
+      
     },
   ];
 }
@@ -218,27 +219,26 @@ function seedUsers(db, users) {
     ...user,
     password: bcrypt.hashSync(user.password, 1),
   }));
-  return db.insert(usersWithPassword).into('user');
+   db.insert(usersWithPassword).into('user');
 }
 
 function seedArticles(db, articles) {
-  return db.insert(articles).into('article');
+   db.insert(articles).into('article');
 }
 
 function seedComments(db, comments) {
-  return db.insert(comments).into('comment');
+   db.insert(comments).into('comment');
 }
 
 function seedArticleVote(db, articleVote) {
-  return db.insert(articleVote).into('article_vote');
+   db.insert(articleVote).into('article_vote');
 }
 
 function seedSaveArticle(db, saveArticle) {
-  return db.insert(saveArticle).into('save');
+   db.insert(saveArticle).into('save');
 }
-
 function cleanTables(db) {
-  return db.raw(
+   db.raw(
     `TRUNCATE
         article,
         user,
@@ -249,12 +249,13 @@ function cleanTables(db) {
         bake
         RESTART IDENTITY CASCADE;
       `
-      );
+    
+  );
 }
 
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
-  const token = jwt.sign({ user_id: user.id }, secret, {
+  const token = jwt.sign({id: user.id,name:user.name}, secret, {
     subject: user.username,
     algorithm: 'HS256',
   });
