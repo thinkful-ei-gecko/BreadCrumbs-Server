@@ -15,7 +15,7 @@ updateRouter
     const { user_id } = req.body;
     const db = req.app.get("db");
     const id = user_id;
-
+    
     UpdateService.getById(db, id)
       .then(user => {
         if (!user) {
@@ -31,8 +31,8 @@ updateRouter
   .get((req, res, next) => {
     res.json(UpdateService.serializeUser(res.user));
   })
-  .delete((req, res, next) => {
-    UpdateService.deleteUser(req.app.get("db"), req.body.user_id)
+  .delete(jsonBodyParser, (req, res, next) => {
+    UpdateService.deleteUser(req.app.get("db"), req.user.id) 
       .then(numRowsAffected => {
         return res.status(204).end();
       })
