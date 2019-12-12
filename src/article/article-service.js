@@ -15,7 +15,8 @@ const ArticleService = {
       .insert(savedArticle)
       .into('article')
       .returning('*')
-      .then(()=>ArticleService.getAllDbArticles(db));
+      .then(()=>ArticleService.getAllDbArticles(db))
+      .orderBy('vote_count', 'desc');
   },
  
   deleteSavedArticle(db, id,user_id) {
