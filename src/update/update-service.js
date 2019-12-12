@@ -67,4 +67,4 @@ const UpdateService = {
   }
 }
 
-module.exports = UpdateService
+module.exports = UpdateService;
