@@ -26,12 +26,12 @@ commentRouter.route('/:article_id/comments/')
       req.params.article_id
     )
       .then(comments => {
-        res.json(comments);
+        res.status(200).json(comments);
       })
       .catch(next);
   });
 
-  commentRouter
+commentRouter
   .use(requireAuth)
   .route('/:commentId')
   .all((req, res, next) => {
