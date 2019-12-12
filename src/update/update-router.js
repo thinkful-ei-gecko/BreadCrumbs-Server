@@ -34,7 +34,7 @@ updateRouter
   .delete((req, res, next) => {
     UpdateService.deleteUser(req.app.get("db"), req.body.id)
       .then(numRowsAffected => {
-        res.status(204).end();
+        return res.status(204).end();
       })
       .catch(next);
   })
