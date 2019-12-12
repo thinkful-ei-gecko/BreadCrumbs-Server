@@ -62,6 +62,7 @@ const UpdateService = {
   },
   deleteUser(db, id){
     return db
+      .from('user')
       .where({'id': id})
       .del()
   }
