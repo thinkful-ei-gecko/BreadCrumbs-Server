@@ -22,9 +22,7 @@ describe('Article Endpoints', function() {
   });
 
   after('disconnect from db', () => db.destroy());
-  // before('clean the table', () => helpers.cleanTables(db));
   before('clean the table', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
-  //afterEach('cleanup', () => helpers.cleanTables(db));
   afterEach('cleanup', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
 
 
@@ -183,7 +181,7 @@ describe('Article Endpoints', function() {
       beforeEach(() =>
         db.into('save').insert(testSaveArticles)
       );
-      it.only('responds with 201 and removes the article', () => {
+      it('responds with 201 and removes the article', () => {
         const userId=testUsers[0].id;
         const idToRemove = 'c95d3a01-de4c-4a6d-91e2-9fd4f9a96ece';
         const expectedSavedArticleList=helpers.makeSavedArticleList(userId,testSaveArticles,testArticles);

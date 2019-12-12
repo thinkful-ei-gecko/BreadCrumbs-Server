@@ -129,14 +129,14 @@ function makeCommentsArray(users,articles){
       article_id:articles[2].id,
     },
     {
-      id:'8a6b6cef-dd20-453c-bc9f-4a3893f5ac56',
+      id:'f10ab2e9-3a2a-4e97-834f-6235f83948a5',
       user_id:users[2].id,
       comment:'comment4',
       date_commented:'2019-11-20T19:31:09Z',
       article_id:articles[3].id,
     },
     {
-      id:'f715f7de-b70a-4d6d-9b96-58dcd843c3bf',
+      id:'547876e0-afaa-477d-bec7-60a473e3c24b',
       user_id:users[3].id,
       comment:'comment5',
       date_commented:'2019-11-18T19:31:09Z',
@@ -233,6 +233,7 @@ function makeSavedArticleList(userId, savedArticles, articles) {
   let matchingArticlesWithUserId= matchingArticles.map((item,i)=>Object.assign({},item,articlesMatchingUserId[i]))
   return matchingArticlesWithUserId
 }
+
 
 function seedUsers(db, users) {
   const usersWithPassword = users.map((user) => ({
