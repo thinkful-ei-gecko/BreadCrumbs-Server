@@ -3,7 +3,8 @@ const ArticleService = {
   getAllDbArticles(db) {
     return db
       .select('*')
-      .from('article');
+      .from('article')
+      .orderBy('vote_count', 'desc');
   },
   insertArticle(db, savedArticle,user_id) {
     console.log(user_id)
