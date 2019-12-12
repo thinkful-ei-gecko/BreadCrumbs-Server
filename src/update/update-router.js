@@ -45,14 +45,21 @@ updateRouter
     username = xss(username);
     password = xss(password);
 
+    const hasUserWithUserName = await UserService.hasUserWithUserName(
+      req.app.get('db'),
+      username
+    );
+
+    if (hasUserWithUserName)
+      return res.status(400).json({ error: `Username already taken` })
+
     const compareMatch = await AuthService.comparePasswords(
       password,
       res.user[0].password
     );
 
-    if (!compareMatch) {
+    if (!compareMatch)
       res.status(404).send(`Incorrect password`);
-    }
 
     const updateFields = { name, username };
     const numberOfValues = Object.values(updateFields).filter(Boolean).length;
