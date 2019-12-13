@@ -4,6 +4,7 @@ const CommentService = {
     return db
       .insert({'article_id':newComment.article_id,'user_id':newComment.user_id,'comment':newComment.comment})
       .into('comment')
+      .where({'comment.article_id':article_id})
       .returning('*')
       .then(rows => {
         return rows[0]
