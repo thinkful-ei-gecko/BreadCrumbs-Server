@@ -11,9 +11,13 @@ Breadcrumbs is a reenvisioned news aggregator that eliminates "gatekeepers" and 
 ## Team: 
 
 > ![hotdog](https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-small/1f32d@2x.png) [Shawn Collette](https://github.com/Shawn-Collette) 
+> 
 > ![hotdog](https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-small/1f32d@2x.png) [James W Lee](https://github.com/Xleex23) 
+> 
 > ![hotdog](https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-small/1f32d@2x.png) [Steven Bull](https://github.com/StevenWBull) 
+> 
 > ![hotdog](https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-small/1f32d@2x.png) [Nandana Rao](https://github.com/Nrrao) 
+> 
 > ![hotdog](https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-small/1f32d@2x.png) [Badri Narayana Tulsiram](https://github.com/Badri-Narayan)
 
 
