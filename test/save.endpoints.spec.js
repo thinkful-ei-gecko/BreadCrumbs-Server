@@ -43,7 +43,7 @@ describe('Article Endpoints', function() {
         const expectedSavedArticleList=helpers.makeSavedArticleList(userId,testSaveArticles,testArticles);
         console.log(expectedSavedArticleList)
         return supertest(app)
-          .get('/api/save/savedarticles')
+          .get('/api/save')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200)
           .expect(expectedSavedArticleList);
