@@ -26,7 +26,7 @@ describe('Article Endpoints', function() {
   afterEach('cleanup', () =>db.raw('TRUNCATE "article","user","comment","comment_vote","article_vote","save","bake" RESTART IDENTITY CASCADE'));
 
 
-  describe('GET /api/save/savedarticles', () => {
+  describe('GET /api/save', () => {
     context('Given articles in the database', () => {
       beforeEach(() =>
         db.into('user').insert(testUsers)
@@ -52,7 +52,7 @@ describe('Article Endpoints', function() {
     });
   });
 
-  describe('Post/api/save/savedarticles',()=>{
+  describe('Post/api/save',()=>{
     beforeEach(() =>
       db.into('user').insert(testUsers)
     );
@@ -70,7 +70,7 @@ describe('Article Endpoints', function() {
         article_id:'0a3891fb-c2b0-4fe7-b065-62ff1029ebcb' ,
       };
       return supertest(app)
-        .post('/api/save/savedarticles')
+        .post('/api/save')
         .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
         .send(saveArticle)
         .expect(201)
@@ -91,7 +91,7 @@ describe('Article Endpoints', function() {
 
   });
 
-  describe('DELETE /api/save/savedarticles/:id', () => {
+  describe('DELETE /api/save/:id', () => {
    
     context('Given there are articles in the database', () => {
       beforeEach(() =>
@@ -109,12 +109,12 @@ describe('Article Endpoints', function() {
         const expectedSavedArticleList=helpers.makeSavedArticleList(userId,testSaveArticles,testArticles);
         const expectedArticlesAfterDelete = expectedSavedArticleList.filter(article => article.id !== idToRemove);
         return supertest(app)
-          .delete(`/api/save/savedarticles/${idToRemove}`)
+          .delete(`/api/save/${idToRemove}`)
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(201)
           .then(res =>
             supertest(app)
-              .get('/api/save/savedarticles')
+              .get('/api/save')
               .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
               .expect(expectedArticlesAfterDelete)
           );

@@ -7,7 +7,7 @@ const saveRouter = express.Router();
 const jsonParser = express.json();
 
 saveRouter
-  .route('/savedarticles')
+  .route('/')
   .all(requireAuth)
   .get((req, res, next) => {
     
@@ -39,7 +39,7 @@ saveRouter
 
 saveRouter
   .use(requireAuth)
-  .route('/savedarticles/:id')
+  .route('/:id')
   .delete((req, res, next) => {
     console.log(req.user.id);
     const db = req.app.get('db');

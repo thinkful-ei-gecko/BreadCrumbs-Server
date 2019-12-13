@@ -18,7 +18,7 @@ const CommentService = {
         'comment.article_id':article_id
       })
       .groupBy('comment.id','user.id')
-      .orderBy('comment.date_commented', 'desc');
+      .orderBy('comment.date_commented');
   },
 
 

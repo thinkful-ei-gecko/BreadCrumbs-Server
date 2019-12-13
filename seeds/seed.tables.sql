@@ -35,9 +35,8 @@ VALUES
   '$2a$10$fCWkaGbt7ZErxaxclioLteLUgg4Q3Rp09WW0s/wSLxDKYsaGYUpjG'
 );
 
-COMMIT;
 
-/* INSERT INTO "article" (id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
+INSERT INTO "article" (id, vote_count, author, title, description, source_name, url, url_to_image, publish_at, content)
 VALUES
 (
   'e6cdd77b-dc7d-4450-9661-e6b7787fb325',
@@ -430,4 +429,4 @@ VALUES
   '2019-12-03T23:12:59Z'
 );
 
-COMMIT; */
+COMMIT; 
