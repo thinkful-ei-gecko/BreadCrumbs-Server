@@ -28,9 +28,7 @@ updateRouter
       })
       .catch(next);
   })
-  // .get((req, res, next) => {
-  //   res.json(UpdateService.serializeUser(res.user));
-  // })
+
   .delete(jsonBodyParser, (req, res, next) => {
     UpdateService.deleteUser(req.app.get("db"), req.user.id) 
       .then(numRowsAffected => {
@@ -97,9 +95,7 @@ updateRouter
       })
       .catch(next);
   })
-  // .get((req, res) => {
-  //   res.json(UpdateService.serializeUser(res.user));
-  // })
+
   .patch(jsonBodyParser, async (req, res, next) => {
     let { password, new_password } = req.body;
 

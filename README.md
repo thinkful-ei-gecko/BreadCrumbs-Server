@@ -4,7 +4,7 @@
 
 ## Project Description:  
 
-Breadcrumbs is a reenvisioned news aggregator that eliminates "gatekeepers" and the inevitable partisanship found on older platforms that rely on editors and manual aggregation.  By empowering our users to anonymously determine an article's value, we have created a decentralized auditing system over which the users have total control.  This decentralized system will affect the visibility of each automatically submitted article, with more valuable articles rising to the top of the user's feed.  Every 15 minutes Breadcrumbs will feed fresh news from over 30,000 unique online publishers for its users to read, evaluate, archive, and publicly discuss.
+Breadcrumbs is a reenvisioned news aggregator that aims to eliminate "gatekeeping" and partisanship found on more traditional platforms which rely on manual aggregation by a select few editors. Breadcrumbs utilizes a decentralized and anonymous voting system, through which the users will determine each articles value. The resulting value will affect the visibility of articles, with more valuable articles rising to the top of the user feed. Every 15 minutes Breadcrumbs will automatically feed fresh news from over 30,000 unique online publishers to its users to read, evaluatate, archive, and discuss.
 
 
 
@@ -112,6 +112,8 @@ Breadcrumbs is a reenvisioned news aggregator that eliminates "gatekeepers" and 
 git clone https://github.com/thinkful-ei-gecko/BreadCrumbs-Server.git
 
 ```
+
+### 2.) Rename
 
 #### 2.) Install NPM:
 

@@ -1,7 +1,7 @@
 {
   "name": "breadcrumbs-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Breadcrumbs is a reenvisioned news aggregator that eliminates gatekeepers and partisanship by empowering our users to anonymously determine an article's value. Breadcrumbs utilizes a decentralized and anonymous voting system, through which the users will determine an articles value. Every 15 minutes Breadcrumbs will feed fresh news from over 30,000 unique online publishers to its users to read, evaluate, archive, and publicly discuss.",
   "main": "src/server.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
@@ -14,8 +14,8 @@
     "deploy": "git push heroku master",
     "seed": "psql -U admin -d breadcrumbs -f ./seeds/seed.tables.sql"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["breadcrumbs", "news", "aggregator"],
+  "authors": "Shawn Collette, James W Lee, Steven Bull, Nandana Rao, Badri Narayana Tulsiram",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

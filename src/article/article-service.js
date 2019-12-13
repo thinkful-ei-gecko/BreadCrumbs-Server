@@ -13,8 +13,7 @@ const ArticleService = {
       .returning('*')
       .then(()=>ArticleService.getAllDbArticles(db))
       
-  },
- 
+  }
 };
 
 module.exports = ArticleService;

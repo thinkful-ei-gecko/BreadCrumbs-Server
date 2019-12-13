@@ -52,15 +52,4 @@ userRouter
     }
   })
 
-  // .put(requireAuth, (req, res) => {
-  //   const sub = req.user.username;
-  //   const payload = {
-  //     user_id: req.user.id,
-  //     name: req.user.name
-  //   };
-  //   res.send({
-  //     authToken: AuthService.createJwt(sub, payload)
-  //   });
-  // })
-
 module.exports = userRouter
