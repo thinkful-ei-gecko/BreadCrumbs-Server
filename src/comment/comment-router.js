@@ -35,26 +35,10 @@ commentRouter
   .all(requireAuth)
   .route('/')
   .post(jsonParser, (req, res, next) => {
-    // const {
-    //   user_id,
-    //   comment,
-    //   article_id
-    // } = req.body;
-
-    console.log(req.body.user_id)
-    console.log(req.body.comment)
-    console.log(req.body.article_id)
-
 
     let user_id = req.body.user_id
     let comment = req.body.comment
     let article_id = req.body.article_id
-
-    // const newcomment = {
-    //   user_id,
-    //   comment,
-    //   article_id
-    // };
 
     const db = req.app.get('db');
 
