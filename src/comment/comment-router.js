@@ -34,22 +34,31 @@ commentRouter.route('/:article_id')
 commentRouter
   .all(requireAuth)
   .route('/')
-  .post(requireAuth,jsonParser, (req, res, next) => {
-    const {
-      user_id,
-      comment,
-      article_id
-    } = req.body;
+  .post(jsonParser, (req, res, next) => {
+    // const {
+    //   user_id,
+    //   comment,
+    //   article_id
+    // } = req.body;
 
-    const newcomment = {
-      user_id,
-      comment,
-      article_id
-    };
+    console.log(req.body.user_id)
+    console.log(req.body.comment)
+    console.log(req.body.article_id)
+
+
+    let user_id = req.body.user_id
+    let comment = req.body.comment
+    let article_id = req.body.article_id
+
+    // const newcomment = {
+    //   user_id,
+    //   comment,
+    //   article_id
+    // };
 
     const db = req.app.get('db');
 
-    CommentService.insertComment(db, newcomment)
+    CommentService.insertComment(db, user_id, comment, article_id)
       .then(comment => {
         res
           .status(201)
@@ -58,8 +67,6 @@ commentRouter
       })
       .catch(next);
   });
-
-
 
 
 module.exports = commentRouter;

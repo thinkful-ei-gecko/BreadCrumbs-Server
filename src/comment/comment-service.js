@@ -1,10 +1,10 @@
 const CommentService = {
 
-  insertComment(db, newComment) {
+  insertComment(db, user_id, comment, article_id) {
     return db
-      .insert({'article_id':newComment.article_id,'user_id':newComment.user_id,'comment':newComment.comment})
+      .insert({ 'user_id':user_id, 'comment':comment, 'article_id':article_id })
       .into('comment')
-      .where({'comment.article_id':article_id})
+      .where({ 'comment.article_id':article_id })
       .returning('*')
       .then(rows => {
         return rows[0]
