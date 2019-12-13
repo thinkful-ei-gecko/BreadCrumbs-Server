@@ -63,7 +63,6 @@ describe('Article Endpoints', function() {
     );
     it('Posts comment,responding with 201 and with new comment',()=>{
       const userId=testUsers[0].id;
-      console.log(userId);
       const newComment = {
         user_id:'4f56a915-f630-4b09-982d-8120c5590153',
         comment:'New Comment',

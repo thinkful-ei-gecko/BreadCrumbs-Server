@@ -26,7 +26,6 @@ articleRouter
   .route('/oven')
   .all(requireAuth)
   .get((req, res, next) => {
-    //console.log(req.user)
     const db = req.app.get('db');
     ArticleService.getAllDbArticles(db)
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
@@ -37,7 +36,6 @@ articleRouter
   .all(requireAuth)
   .route('/')
   .post(requireAuth,jsonParser, (req, res, next) => {
-    // console.log('####',req.user.id)
     const {
       author,
       title,
