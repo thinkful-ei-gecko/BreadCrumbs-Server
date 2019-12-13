@@ -26,7 +26,7 @@ describe('Article Endpoints', function() {
 
   describe('PATCH /api/vote', () =>{
 
-    context('Given there are habits in the database',()=>{
+    context('Updating the vote type',()=>{
       beforeEach(() =>
         db.into('user').insert(testUsers)
       );
