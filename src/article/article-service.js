@@ -7,7 +7,6 @@ const ArticleService = {
       .orderBy('vote_count', 'desc');
   },
   insertArticle(db, savedArticle,user_id) {
-    console.log(user_id)
     return db
       .insert(savedArticle)
       .into('article')

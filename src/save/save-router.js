@@ -18,7 +18,6 @@ saveRouter
       .catch(next);
   })
   .post(requireAuth,jsonParser, (req, res, next) => {
-    console.log('*****');
     const{
       article_id,
       user_id
@@ -41,7 +40,6 @@ saveRouter
   .use(requireAuth)
   .route('/:id')
   .delete((req, res, next) => {
-    console.log(req.user.id);
     const db = req.app.get('db');
     const id = req.params.id;
     const user_id=req.user.id;

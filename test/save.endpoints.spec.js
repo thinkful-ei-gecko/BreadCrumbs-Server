@@ -41,7 +41,6 @@ describe('Article Endpoints', function() {
       it('responds with 200 and saved articles list', () => {
         const userId=testUsers[0].id;
         const expectedSavedArticleList=helpers.makeSavedArticleList(userId,testSaveArticles,testArticles);
-        console.log(expectedSavedArticleList)
         return supertest(app)
           .get('/api/save/savedarticles')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
@@ -64,7 +63,6 @@ describe('Article Endpoints', function() {
     );
     it('Saves new article,responding with 201 and articlelist with new article',()=>{
       const userId=testUsers[0].id;
-      console.log(userId);
       const saveArticle = {
         user_id:userId,
         article_id:'0a3891fb-c2b0-4fe7-b065-62ff1029ebcb' ,
