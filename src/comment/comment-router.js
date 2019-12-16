@@ -18,7 +18,7 @@ const serializeComment = comment => ({
 });
 
 
-commentRouter.route('/:article_id/comments/')
+commentRouter.route('/:article_id')
   .all(requireAuth)
   .get((req, res, next) => {
     CommentService.getCommentsForArticle(
@@ -26,67 +26,23 @@ commentRouter.route('/:article_id/comments/')
       req.params.article_id
     )
       .then(comments => {
-        res.json(comments);
-      })
-      .catch(next);
-  });
-
-  commentRouter
-  .use(requireAuth)
-  .route('/:commentId')
-  .all((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.params.commentId;
-    CommentService.getcommentById(db, id)
-      .then(comment => {
-        if(!comment) {
-          return res.status(404).json({error: {message: 'comment does not exist'}});
-        }
-        res.comment = comment;
-        next();
-      })
-      .catch(next);
-  })
-  .get((req, res, next) => {
-    res.status(200).json(res.comment);
-  })
-  .delete((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.params.commentId;
-
-    CommentService.deletecomment(db, id)
-      .then(() => {
-        res.status(204).end();
+        res.status(200).json(comments);
       })
       .catch(next);
   });
 
 commentRouter
-  .use(requireAuth)
+  .all(requireAuth)
   .route('/')
-  .get((req, res, next) => {
-    const db = req.app.get('db');
-    const id = req.user.id;
-    CommentService.getAllComments(db, id)
-      .then(comments => res.status(200).json(comments.map(serializeComment)))
-      .catch(next);
-  })
-  .post(requireAuth,jsonParser, (req, res, next) => {
-    const {
-      user_id,
-      comment,
-      article_id
-    } = req.body;
+  .post(jsonParser, (req, res, next) => {
 
-    const newcomment = {
-      user_id,
-      comment,
-      article_id
-    };
+    let user_id = req.body.user_id
+    let comment = req.body.comment
+    let article_id = req.body.article_id
 
     const db = req.app.get('db');
 
-    CommentService.insertComment(db, newcomment)
+    CommentService.insertComment(db, user_id, comment, article_id)
       .then(comment => {
         res
           .status(201)
@@ -95,8 +51,6 @@ commentRouter
       })
       .catch(next);
   });
-
-
 
 
 module.exports = commentRouter;

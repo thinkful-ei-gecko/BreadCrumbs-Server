@@ -15,7 +15,7 @@ updateRouter
     const { user_id } = req.body;
     const db = req.app.get("db");
     const id = user_id;
-
+    
     UpdateService.getById(db, id)
       .then(user => {
         if (!user) {
@@ -28,11 +28,11 @@ updateRouter
       })
       .catch(next);
   })
-  .get((req, res, next) => {
-    res.json(UpdateService.serializeUser(res.user));
-  })
-  .delete((req, res, next) => {
-    UpdateService.deleteUser(req.app.get("db"), req.body.user_id)
+  // .get((req, res, next) => {
+  //   res.json(UpdateService.serializeUser(res.user));
+  // })
+  .delete(jsonBodyParser, (req, res, next) => {
+    UpdateService.deleteUser(req.app.get("db"), req.user.id) 
       .then(numRowsAffected => {
         return res.status(204).end();
       })
@@ -97,9 +97,9 @@ updateRouter
       })
       .catch(next);
   })
-  .get((req, res) => {
-    res.json(UpdateService.serializeUser(res.user));
-  })
+  // .get((req, res) => {
+  //   res.json(UpdateService.serializeUser(res.user));
+  // })
   .patch(jsonBodyParser, async (req, res, next) => {
     let { password, new_password } = req.body;
 

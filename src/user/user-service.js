@@ -30,7 +30,7 @@ const UserService = {
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
       return 'Password must contain one upper case, lower case, number and special character'
     }
-    return null
+    return null;
   },
   hashPassword(password) {
     return bcrypt.hash(password, 12)
@@ -40,31 +40,9 @@ const UserService = {
       id: user.id,
       name: xss(user.name),
       username: xss(user.username),
-    }
+    };
   },
-  getById(db, id) {
-    return db
-      .from('user')
-      .select('*')
-      .where('id', id)
-  },
-  updateFields(db, id, updateFields) {
-    return db
-      .from('user')
-      .where({id})
-      .update(updateFields)
-  },
-  updatePassword(db, id, new_password) {
-    return db
-      .from('user')
-      .where({'id': id})
-      .update({'password': new_password})
-  },
-  deleteUser(db, id){
-    return db
-      .where({'id': id})
-      .del()
-  }
-}
 
-module.exports = UserService
+};
+
+module.exports = UserService;

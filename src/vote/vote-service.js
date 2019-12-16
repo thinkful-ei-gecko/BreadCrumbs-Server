@@ -1,4 +1,3 @@
-// const ArticleService = require('../article/article-service');
 const VoteService = {
   checkArticleVote(db,article_id,user_id){
     return db
