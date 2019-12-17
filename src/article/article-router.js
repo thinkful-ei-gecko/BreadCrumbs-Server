@@ -21,7 +21,7 @@ const serializeArticle = article => ({
   content: xss(article.content),
 });
 
-
+//Getting articles from the database
 articleRouter
   .route('/oven')
   .all(requireAuth)
@@ -31,7 +31,7 @@ articleRouter
       .then(articles => res.status(200).json(articles.map(serializeArticle)))
       .catch(next);
   });
-
+//Saving articles into the database
 articleRouter
   .all(requireAuth)
   .route('/')

@@ -17,7 +17,7 @@ const serializeComment = comment => ({
   article_id: xss(comment.article_id),
 });
 
-
+// get comments for particular article
 commentRouter.route('/:article_id')
   .all(requireAuth)
   .get((req, res, next) => {
@@ -30,7 +30,7 @@ commentRouter.route('/:article_id')
       })
       .catch(next);
   });
-
+//Post comment for particlar article
 commentRouter
   .all(requireAuth)
   .route('/')

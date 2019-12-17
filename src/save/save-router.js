@@ -6,6 +6,7 @@ const SaveService = require('../save/save-service');
 const saveRouter = express.Router();
 const jsonParser = express.json();
 
+//get saved article for particular user
 saveRouter
   .route('/')
   .all(requireAuth)
@@ -17,6 +18,7 @@ saveRouter
       .then(savedArticles => res.json(savedArticles))
       .catch(next);
   })
+  //User can save the article
   .post(requireAuth,jsonParser, (req, res, next) => {
     const{
       article_id,
@@ -35,7 +37,7 @@ saveRouter
     
       .catch(next);
   });
-
+//user can delete the saved article
 saveRouter
   .use(requireAuth)
   .route('/:id')
